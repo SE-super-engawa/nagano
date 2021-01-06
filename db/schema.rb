@@ -44,5 +44,35 @@ ActiveRecord::Schema.define(version: 20210106073051) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+  
+  create_table "genres", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_products", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.integer  "price"
+    t.integer  "quantity"
+    t.integer  "making_status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.string   "postal_code"
+    t.string   "address"
+    t.string   "name"
+    t.integer  "shipping_fee"
+    t.integer  "total_price"
+    t.integer  "payment"
+    t.integer  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
 end
