@@ -1,0 +1,12 @@
+<%= form_with model: shipping_address, local:true do |f| %>
+  <%= f.label :"郵便番号(ハイフンなし)" %>
+  <%= f.text_field :postal_code %>
+
+  <%= f.label :"住所" %>
+  <%= f.text_area :address %>
+
+  <%= f.label :"宛名" %>
+  <%= f.text_area :name %>
+
+  <%= f.submit '新規登録', class:'btn btn-success mt-1' %>
+<% end %>

@@ -1,2 +1,23 @@
-<h1>Public::ShippingAddresses#index</h1>
-<p>Find me in app/views/public/shipping_addresses/index.html.erb</p>
+<h1>配送先登録 / ⼀覧</h1>
+<div><%= render 'new_form', shipping_address: @shipping_address %></div>
+
+<div>
+  <table class="table">
+  <tr>
+    <th郵便番号></th>
+    <th>住所</th>
+    <th>宛名</th>
+    <th></th>
+  </tr>
+  <tr>
+  <% @shipping_address.each do |shipping_address| %>
+    <td><%= shipping_address.postal_code %></td>
+    <td><%= shipping_address.address %></td>
+    <td><%= shipping_address.name %></td>
+    <td><%= link_to '編集',  edit_shipping_address_path(params[:id]), class:'btn btn-sm btn-success' %>
+        <%= link_to '削除', shipping_address_path(@shipping_address.id), method: :delete, class:'btn btn-sm btn-danger', "data-confirm" => "本当に消しますか?" %>
+    </td>
+  <% end %>
+  </tr>
+  </table>
+</div>
