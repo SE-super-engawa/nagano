@@ -1,23 +1,25 @@
-<h1>配送先登録 / ⼀覧</h1>
+<h3>配送先登録 / ⼀覧</h3>
 <div><%= render 'new_form', shipping_address: @shipping_address %></div>
 
-<div>
-  <table class="table">
+<div class="container">
+  <table class="table table-bordered">
+  <thead class="thead-light">
   <tr>
-    <th郵便番号></th>
+    <th>郵便番号</th>
     <th>住所</th>
     <th>宛名</th>
     <th></th>
   </tr>
+  </thead>
+  <% @shipping_addresses.each do |shipping_address| %>
   <tr>
-  <% @shipping_address.each do |shipping_address| %>
     <td><%= shipping_address.postal_code %></td>
     <td><%= shipping_address.address %></td>
     <td><%= shipping_address.name %></td>
-    <td><%= link_to '編集',  edit_shipping_address_path(params[:id]), class:'btn btn-sm btn-success' %>
-        <%= link_to '削除', shipping_address_path(@shipping_address.id), method: :delete, class:'btn btn-sm btn-danger', "data-confirm" => "本当に消しますか?" %>
+    <td><%= link_to '編集', edit_shipping_address_path(shipping_address.id), class:'btn btn-sm btn-success' %>
+        <%= link_to '削除', shipping_address_path(shipping_address.id), method: :delete, class:'btn btn-sm btn-danger', "data-confirm" => "削除してよろしいですか" %>
     </td>
-  <% end %>
   </tr>
+  <% end %>
   </table>
 </div>
