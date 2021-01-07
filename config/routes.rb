@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   namespace :public do
-    get 'homes/top'
+    get '/', to: 'homes#top'
   end
 
   namespace :public do
-    get 'homes/about'
+    get '/about', to: 'homes#about'
   end
 
   devise_for :admins
