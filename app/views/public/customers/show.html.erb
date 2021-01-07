@@ -1,2 +1,21 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class="container">
+  <h3 class="my-3">マイページ</h3>
+</div>
+
+<div class="container">
+  <h3 class="font-weight-bold">登録情報 <span><%= link_to '編集する', edit_customers_path,  class:'btn btn-sm btn-success' %>
+
+  <table class="table table-bordered">
+    <tr><th class="active">氏名</th>           <td><%= @customer.family_name + @customer.first_name  %></td></tr>
+    <tr><th class="active">カナ</th>           <td><%= @customer.family_name_kana + @customer.first_name_kana  %></td></tr>
+    <tr><th class="active">郵便番号</th>       <td><%= @customer.postal_code %></td></tr>
+    <tr><th class="active">住所</th>           <td><%= @customer.address %></td></tr>
+    <tr><th class="active">電話番号</th>       <td><%= @customer.phone_number %></td></tr>
+    <tr><th class="active">メールアドレス</th> <td><%= @customer.email %></td></tr>
+  </table>
+
+  <h3 class="font-weight-bold">配送先 <span><%= link_to '一覧を見る', shipping_addresses_path,  class:'btn btn-sm btn-primary' %>
+
+  <h3 class="font-weight-bold">注文履歴<span><%= link_to '一覧を見る', orders_path,  class:'btn btn-sm btn-primary' %>
+
+</div>

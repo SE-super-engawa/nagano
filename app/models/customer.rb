@@ -18,9 +18,4 @@ class Customer < ApplicationRecord
                       message: "全角カタカナのみで入力して下さい"
                     }
 
-  # 退会機能
-  def active_for_authentication?
-    super && (self.is_deleted == false)
-  end
-
 end
