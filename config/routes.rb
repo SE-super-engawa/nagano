@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  scope module: :public do
+    resources :shipping_addresses, except:[:new, :show]
+  end
+
   devise_for :admins
 
   devise_for :customers
