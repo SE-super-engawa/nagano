@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
+
+  devise_for :customers, controllers: {
+    sessions: 'public/customers/sessions',
+    passwords: 'public/customers/passwords',
+    registrations: 'public/customers/registrations'
+  }
+
+  namespace :public do
+    get '/', to: 'homes#top'
+    get '/about', to: 'homes#about'
+  end
+
   scope module: :public do
     resources :shipping_addresses, except:[:new, :show]
 
@@ -12,10 +25,6 @@ Rails.application.routes.draw do
     post 'orders/confirm', to: 'orders#confirm'       #resources :orderより前に記載必須
     resources :orders, only: [:new, :index, :show, :create]
   end
-
-  devise_for :admins
-
-  devise_for :customers
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
