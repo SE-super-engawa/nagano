@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about', to: 'homes#about'
+
+    resources :products, only: [:index, :show]
+
     resources :shipping_addresses, except:[:new, :show]
 
     get 'customers/my_page', to: 'customers#show'         #resource :customersより前に記載必須
