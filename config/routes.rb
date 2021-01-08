@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
     resources :products, only: [:index, :show]
 
+    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :create, :update, :destroy]
+
     resources :shipping_addresses, except:[:new, :show]
 
     get 'customers/my_page', to: 'customers#show'         #resource :customersより前に記載必須
