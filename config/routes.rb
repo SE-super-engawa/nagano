@@ -8,12 +8,9 @@ Rails.application.routes.draw do
     registrations: 'public/customers/registrations'
   }
 
-  namespace :public do
-    get '/', to: 'homes#top'
-    get '/about', to: 'homes#about'
-  end
-
   scope module: :public do
+    root to: 'homes#top'
+    get '/about', to: 'homes#about'
     resources :shipping_addresses, except:[:new, :show]
 
     get 'customers/my_page', to: 'customers#show'         #resource :customersより前に記載必須
