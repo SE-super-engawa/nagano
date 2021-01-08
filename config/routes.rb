@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     get 'customers/my_page', to: 'customers#show'
     get 'customers/check', to: 'customers#check'
     patch 'customers/withdraw', to: 'customers#withdraw'
+    resources :orders, only: [:new, :index, :show, :create]
+    get 'orders/thanks', to:'orders#thanks'
+    post 'orders/confirm', to:'orders#confirm'
   end
 
   devise_for :admins
