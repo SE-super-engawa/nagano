@@ -13,7 +13,7 @@
     <tr><%= customer.id %></tr>
     <tr><%= link_to "#{customer.family_name}+#{customer.first_name}",customer_path(customer) %></tr>
     <tr><%= customer.email %></tr>
-    <tr><%= customer.is_deleted ? '退会' : '有効' %></tr>
+    <tr><%= customer.is_deleted ? '退会',class:"text-secondary" : '有効',class:"text-success" %></tr>
   </tbody>
   <% end %>
 </table>
