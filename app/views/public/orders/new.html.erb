@@ -1,0 +1,13 @@
+<h3 class="my-3">注文情報入力</h3>
+
+<%= form_with(model: @order, local: true, url: orders_confirm_path) do |f| %>
+<div>
+  <h4><strong>支払方法</strong></h4>
+  <!-- ラジオボタンの記述 checked: "checked"で初期値で選択された状態にする-->
+    <label><%= f.radio_button :payment, 0, checked: "checked" %> クレジットカード </label><br>
+    <label><%= f.radio_button :payment, 1 %> 銀行振込</label>
+
+  <h4><strong>お届け先</strong></h4>
+  <!-- ログインユーザーの住所  -->
+
+<% end %>
