@@ -14,8 +14,6 @@ def active_for_authentication?
   super && (self.is_deleted == false)
 end
 
-enum is_deleted: { valid: false, invalid: true }
-
 devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
 
 end

@@ -1,4 +1,4 @@
-<h2><%= @customer.family_name %>　<%= @customer.first_name %>さんの会員詳細 </h2>
+<h2><%= @customer.family_name %><%= @customer.first_name %>さんの会員詳細 </h2>
 <table>
   <tbody>
     <tr>
@@ -31,7 +31,13 @@
     </tr>
     <tr>
       <td>会員ステータス</td> 
-      <td><%= @customer.is_deleted %></td>
+      <td>
+        <% if (@customer.is_deleted?) %>
+          <div class="text-secondary">退会</div>
+        <% else %>
+          <div class="text-success">有効</div>
+        <% end %>
+      </td>
     </tr>
   </tbody>
 </table>

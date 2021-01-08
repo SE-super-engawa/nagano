@@ -1,5 +1,5 @@
-<h2><%= @customer.name %>さんの会員情報編集</h2>
-<%= form_with model:@customer,local:true do |f| %>
+<h2><%= @customer.family_name %><%= @customer.first_name %>さんの会員情報編集</h2>
+<%= form_with model: @customer,url:"/admin/customers/#{@customer.id}",local:true do |f| %>
   <div class="customer-info" >
     <table>
       <tr>
@@ -33,10 +33,10 @@
        <tr>
         <td>会員ステータス</td>
         <td>
-          <%= f.label :is_deleted_invalid,'有効',class:"text-success" %>
-          <%= f.radio_button :is_deleted, :invalid %>
-          <%= f.label :is_deleted_valid,'退会',class:"text-secondary" %>
-          <%= f.radio_button :is_deleted, :valid %>
+          <%= f.radio_button :is_deleted, :false %>
+          <%= f.label :is_deleted_false,'有効' %>
+          <%= f.radio_button :is_deleted, :true %>
+          <%= f.label :is_deleted_true,'退会' %>
         </td>
       </tr>
     </table>
