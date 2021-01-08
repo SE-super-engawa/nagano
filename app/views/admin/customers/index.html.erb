@@ -1,18 +1,21 @@
 <h2>会員一覧</h2>
 <table>
   <thead>
-    <tr>会員ID</tr>
-    <tr>氏名</tr>
-    <tr>メールアドレス</tr>
-    <tr>ステータス</tr>
+    <tr>
+      <td>会員ID</td>
+      <td><%= link_to "氏名",customers_path %></td>
+      <td>メールアドレス</td>
+      <td>ステータス</td>
+    </tr>
   </thead>
-<% @customers.each do |customer| %>
+  <% @customers.each do |customer| %>
   <tbody>
     <tr><%= customer.id %></tr>
     <tr><%= link_to "#{customer.family_name}+#{customer.first_name}",customer_path(customer) %></tr>
     <tr><%= customer.email %></tr>
-    <tr><%= customer.is_deleted %></tr>
+    <tr><%= customer.is_deleted ? '退会' : '有効' %></tr>
   </tbody>
+  <% end %>
 </table>
-<% end %>
+
 <%= paginate @customers %>

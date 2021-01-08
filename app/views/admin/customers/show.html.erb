@@ -1,4 +1,4 @@
-<p><%= @customer.family_name %>　<%= @customer.first_name %>さんの会員詳細 </p>
+<h2><%= @customer.family_name %>　<%= @customer.first_name %>さんの会員詳細 </h2>
 <table>
   <tbody>
     <tr>
@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td>フリガナ</td>
-      <td><%= @customer.family_name_kana %>　<%= @customer.first_name_kana %></td>]
+      <td><%= @customer.family_name_kana %>　<%= @customer.first_name_kana %></td>
     </tr>
     <tr>
       <td>郵便番号</td> 
@@ -37,4 +37,4 @@
 </table>
 
 <%= link_to "編集する",edit_admin_customer_path(@customer) %>
-<%= link_to "注文履歴一覧を見る"　%>
+<%= link_to "注文履歴一覧を見る","/customer/order_products" %>
