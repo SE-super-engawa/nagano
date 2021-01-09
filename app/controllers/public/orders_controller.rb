@@ -7,9 +7,17 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = current_customer.cart_items
-    @total_price = 0
 
-    params[:order][:payment] = params[:order][:payment].to_i #payment_methodの数値に変換
+    # 小計を出す。=0は初期値
+    @total_price = 0
+    @cart_items.each do |f|
+      @total_price += f.subtotal
+    end
+
+    # 請求金額の計算格納
+    @order_total_price = @total_price + 800
+
+    params[:order][:payment] = params[:order][:payment].to_i #paymentの数値に変換
     @order = Order.new(order_params) #情報を渡している
 
     #分岐
@@ -30,13 +38,16 @@ class Public::OrdersController < ApplicationController
       @order.name        = params[:order][:name]
       @ship = "1"
     end
+
   end
 
   def create
+    params[:order][:payment] = params[:order][:payment].to_i #paymentの数値に変換
     @order = Order.new(order_params)
+    @order.customer_id = current_customer.id #自身のidを代入
     @order.save
     flash[:notice] = "ご注文が確定しました。"
-    redirect_to thanks_customers_orders_path
+    redirect_to orders_thanks_path
 
     # もし情報入力でnew_addressの場合ShippingAddressに保存
     if params[:order][:ship] == "1"
