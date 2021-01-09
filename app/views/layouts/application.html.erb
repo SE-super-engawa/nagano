@@ -10,6 +10,13 @@
 
   <body>
 
+  <!--5秒かけてアラートを消したい-->
+  <script>
+  $(function(){
+    $(".alert").fadeOut(5000);
+  });
+　</script>
+
 
      <% if customer_signed_in? %>
       <li>
