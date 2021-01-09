@@ -23,8 +23,6 @@ class Public::CartItemsController < ApplicationController
       render "public/products/show"
   end
 
-
-
   def update
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
     flash.now[:success] = "#{@cart_item.product.name}の数量を変更しました"

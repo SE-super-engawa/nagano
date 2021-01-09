@@ -4,7 +4,7 @@ class Public::ProductsController < ApplicationController
 
   def index
     @genres = Genre.all
-    @products = Product.where(is_active: true).page(params[:page]).per(8)     #販売中の商品のみ１ページにつき８個表示
+    @products = Product.all.page(params[:page]).per(8)     #もし販売中の商品のみ１ページにつき８個表示なら= Product.where(is_active: true).page(params[:page]).per(8)
   end
 
   def show
