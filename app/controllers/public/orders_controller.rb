@@ -64,10 +64,22 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @order = Order.where(customer_id: current_customer.id).order(created_at: :desc)
   end
 
   def show
     @order = Order.find(params[:id])
+    @order_products = OrderProduct.all
+    @cart_items = current_customer.cart_items
+
+    # 小計を出す。=0は初期値
+    @total_price = 0
+    @cart_items.each do |f|
+      @total_price += f.subtotal
+    end
+
+    # 請求金額の計算格納
+    @order_total_price = @total_price + 800
   end
 
    private
