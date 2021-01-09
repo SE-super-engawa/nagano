@@ -3,13 +3,17 @@
     <div class="container">
       <div class="row">
         <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
-          <img src="/assets/image/cake-4916482_640.jpg">
-          <span>
+          <div style="position: relative; display:inline-block;"></div>
+          <img src="/assets/image/cake-4916482_640.jpg" alt="topimg">
+          <div style="background-color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); max-width: 100%; max-height: 100%; padding: 15px; text-align: center;">
+          <p>
             ようこそ、ながのCAKEへ！<br>
             このサイトは、ケーキ販売のECサイトになります。<br>
             会員でない方も商品の閲覧はできますが、<br>
             購入には会員登録が必要になります。
-          </span>
+          </p>
+          </div>
+          </div>
         </div>
       </div>
 
@@ -19,7 +23,7 @@
             <% @products.each do |product| %>
               <div class="product-container">
                 <%= link_to product_path(product.id), class: "btn-link" do %>
-                <%= attachment_image_tag product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                <%= attachment_image_tag product, :image_id, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
                 <% end %>
                 <%= product.name %>
                 <!-- <%= product.price %>ではない、モデルかコントローラーで計算？-->
