@@ -15,6 +15,19 @@
       <div class="row">
         <div class="col-xs-12">
           <h2>新着商品</h2>
+            <% @products.each do |product| %>
+              <div class="product-container">
+                <%= link_to product_path(product.id), class: "btn-link" do %>
+                <%= attachment_image_tag product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                <% end %>
+                <%= product.name %>
+                <!-- <%= product.price %>ではない、モデルかコントローラーで計算？-->
+                <!--.to_s(:delimited)使用？-->
+              </div>
+            <% end %>
+        </div>
+        <div class="col-xs-12">
+          <%= link_to "全ての商品を見る>", products_path, class: "btn-link pull-right" %>
         </div>
       </div>
 
