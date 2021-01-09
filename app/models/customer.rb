@@ -18,4 +18,8 @@ class Customer < ApplicationRecord
                       message: "全角カタカナのみで入力して下さい"
                     }
 
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
+
 end
