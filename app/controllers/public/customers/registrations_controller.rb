@@ -42,9 +42,7 @@ class Public::Customers::RegistrationsController < Devise::RegistrationsControll
 
   # protected
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :address, :phone_number])
-  end
+
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -65,4 +63,14 @@ class Public::Customers::RegistrationsController < Devise::RegistrationsControll
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+ protected
+  # パスワードなくても編集できる
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
+  def after_update_path_for(resource)
+    customers_my_page_path
+  end
 end
