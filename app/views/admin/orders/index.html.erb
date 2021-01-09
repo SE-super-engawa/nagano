@@ -6,11 +6,15 @@
     <td>注文個数</td>
     <td>注文ステータス</td>
   </tr>
+  <% sum = 0 %>
   <% @orders.each do |order| %>
   <tr>
-    <td><%=order.created_at %></td>
+    <td><%=link_to "#{order.created_at}",admin_order_path(order) %></td>
     <td><%=order.customer.name %></td>
-    <td></td>
+    <% order.order_items.each do |order_item| %>
+      <% sum += order_item.quantity %>
+    <% end %>
+    <td><%= sum %></td>
     <td><%=order.status %></td>
   </tr>
   <% end %>
