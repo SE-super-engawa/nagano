@@ -3,7 +3,7 @@ class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-    @cart_items = current_cart
+    @cart_items = current_customer.cart_items
   end
 
   def create
@@ -20,16 +20,17 @@ class Public::CartItemsController < ApplicationController
 　　  @product = Product.find(params[:cart_item][:product_id])     #もし個数選択をしていなかったら商品詳細に遷移後、個数選択をさせる
 　　  @cart_item = CartItem.new
       flash[:alert] = "個数を選択してください"
-      render ("customer/products/show")
-    end
+      render "public/products/show"
   end
+
+
 
   def update
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
     flash.now[:success] = "#{@cart_item.product.name}の数量を変更しました"
     @cart_items = current_cart
-    #@price = sub_price(@cart_item).to_s(:delimited)        ＃よくわからない！！！
-    #@total = total_price(@cart_items).to_s(:delimited)
+    @price = sumprice(@cart_item).to_s(:delimited)
+    #@total = total_price(@cart_items).to_s(:delimited)   #税抜カラムのみで税込価格・小計・合計価格どうしよ・・・
     redirect_to customers_cart_items_path
   end
 
@@ -53,6 +54,4 @@ class Public::CartItemsController < ApplicationController
   def params_cart_item
     params.require(:cart_item).permit(:quantity, :product_id)
   end
-　end
-
 end
