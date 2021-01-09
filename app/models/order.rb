@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
-# belongs_to :customer
-# has_many :order_products
+belongs_to :customer
+has_many :order_products
 
 enum payment:{
     credit_card: 0,   #クレジットカード
