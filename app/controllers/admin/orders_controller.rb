@@ -1,9 +1,12 @@
 class Admin::OrdersController < ApplicationController
 
+  # before_action :if_not_admin #
+  
   def index
     path = Rails.application.routes.recognize_path(request.referer)
-    if path[:controller] == "admins/customers" && path[:action] == "show"
+    if path[:controller] == "admin/customers" && path[:action] == "show"
       @orders = Order.where(customer_id: path[:id])
+      @orders = @orders.page(params[:page])
     else
       @orders = Order.page(params[:page]).reverse_order
     end
@@ -27,6 +30,10 @@ class Admin::OrdersController < ApplicationController
   
   def order_params
     params.permit(:status)
+  end
+
+  def if_not_admin
+    redirect_to root_path unless current_user.admin?
   end
   
 end

@@ -2,7 +2,7 @@
 <table>
   <tr>
     <td>購入者</td>
-    <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",admin_customer_path(@order.customer) %></u></td>
+    <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",admin_customer_path(@order.customer),class:"text-dark" %></u></td>
   </tr>
   <tr>
     <td>注文日</td>
@@ -35,6 +35,9 @@
     <td>製作ステータス</td>
   </tr>
   
+<% 
+=begin
+%>
   <% @order.order_products each do |order_product| %>
   <tr>
     <td><%= order_product.products.name %></td>
@@ -53,3 +56,6 @@
 <span>商品合計<%= @total_price %>円</span>
 <span>送料<%= @order.shipping_fee %>円</span>
 <span>請求金額<%= @invice_fee %>円</span> 
+<%
+=end
+%>
