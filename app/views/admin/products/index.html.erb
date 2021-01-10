@@ -10,9 +10,9 @@
 
  <% @products.each do |product|%>
 <tr>
-  <th><%= product.product_id %></th>
+  <th><%= product.id %></th>
   <th><%= product.name %></th>
-  <th><%= product.price %></th>
+  <th><%= product.price.to_s(:delimited) %></th>
   <th><%= product.genre.name %></th>
   <th><%= product.is_active %></th>
 </tr>
@@ -24,10 +24,11 @@
 
 <h4>商品新規登録</h4>
 
-<%= form_with model:@product, local:true do |f| %>
+<%= form_with model:@product,url: admin_products_path, method: :post, local:true do |f| %>
 
   <h4>商品画像</h4>
   <%= f.attachment_field :image %>
+  
   <!--アタッチメントフィールドが適用されない-->
 
   <h4>商品名</h4>
