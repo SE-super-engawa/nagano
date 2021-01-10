@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about', to: 'homes#about'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4bc745fe96be7f5d39439554ff36f88ff5a20f67
     resources :shipping_addresses, except:[:new, :show]
 
     get 'customers/my_page', to: 'customers#show'         #resource :customersより前に記載必須

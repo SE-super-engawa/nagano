@@ -6,9 +6,15 @@ class Public::Customers::RegistrationsController < Devise::RegistrationsControll
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :configure_account_update_params, only: [:update]
 
+<<<<<<< HEAD
 # def after_sign_in_path_for(resource)
 #     customers_my_page_path
 # end
+=======
+  def after_sign_in_path_for(resource)
+    customers_my_page_path
+  end
+>>>>>>> 4bc745fe96be7f5d39439554ff36f88ff5a20f67
 
   # GET /resource/sign_up
   # def new
