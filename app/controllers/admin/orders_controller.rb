@@ -21,15 +21,12 @@ class Admin::OrdersController < ApplicationController
   
   def update
     order = Order.find(params[:id])
-    if order.update(order_params)
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_to root_path
-    end  
+    order.update(order_params)
+    redirect_back(fallback_location: root_path)
   end
   
   def order_params
-    params.permit(:status)
+    params.require(:order).permit(:status)
   end
 
   def if_not_admin
