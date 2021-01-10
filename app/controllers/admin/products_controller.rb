@@ -14,10 +14,12 @@ class Admin::ProductsController < ApplicationController
 
   def create
      @product =Product.new(product_params)
-    # @genre = Genre.find(params[:id])
+    # @product.genre_id = @product_id
      if @product.save
-     redirect_to admin_products_path(@product.id)
+     redirect_to admin_product_path(@product.id)
     else
+
+     render :index
     end
   end
 
@@ -29,14 +31,14 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     if @product.update(product_params)
-      redirect_to admin_product_path
+      redirect_to admin_product_path(@product.id)
     else
     end
   end
 
  private
   def product_params
-    params.require(:product).permit(:name,:image, :description, :price, :is_active, :genre_id)
+    params.require(:product).permit(:name, :image, :description, :price, :is_active, :genre_id)
   end
 
 

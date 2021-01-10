@@ -16,22 +16,20 @@
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>新着商品</h2>
+      <h3 class="m-3">新着商品</h3>
+        <div class="row">
             <% @products.each do |product| %>
-              <div class="product-container">
+              <div class="product-container col-lg-2 offset mt-4 pl-5 ">
                 <%= link_to product_path(product.id), class: "btn-link" do %>
-                <%= attachment_image_tag product, :image_id, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
-                <% end %>
+                <%= attachment_image_tag product, :image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" %><br>
                 <%= product.name %>
-                <!-- <%= product.price %>ではない、モデルかコントローラーで計算？-->
-                <!--.to_s(:delimited)使用？-->
+                <% end %>
+                <!--税込価格を表示-->
+                <p>¥ <%= product.tax_price.to_s(:delimited) %></p>
               </div>
             <% end %>
         </div>
-        <div class="col-xs-12">
+        <div class="col-md-10 text-right">
           <%= link_to "全ての商品を見る>", products_path, class: "btn-link pull-right" %>
         </div>
       </div>

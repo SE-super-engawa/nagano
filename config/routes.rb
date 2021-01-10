@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'admin' => 'homes#top', as: 'homes'
+  get '/admin' => 'admin/homes#top', as: 'homes'
+
   get 'sessions/new'
   get 'sessions/crete'
   get 'sessions/destroy'

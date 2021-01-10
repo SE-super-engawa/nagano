@@ -33,12 +33,19 @@ class Public::OrdersController < ApplicationController
       @order.name        = ship.name
 
     elsif params[:order][:addresses] ==  "new_address" #新しいお届け先が選択された時
-      @order.postal_code = params[:order][:postal_code]
-      @order.address     = params[:order][:address]
-      @order.name        = params[:order][:name]
-      @ship = "1"
+      @shipping_address = ShippingAddress.new()
+      @shipping_address.postal_code = params[:order][:postal_code]
+      @shipping_address.address     = params[:order][:address]
+      @shipping_address.name        = params[:order][:name]
+      @shipping_address.customer_id = current_customer.id
+      if @shipping_address.save
+        @order.postal_code = @shipping_address.postal_code #上記で代入された郵便番号をorderに代入
+        @order.name = @shipping_address.name #上記で代入された宛名をorderに代入
+        @order.address = @shipping_address.address #上記で代入された住所をorderに代入
+      else
+       render 'new'
+      end
     end
-
   end
 
   def create
@@ -48,11 +55,6 @@ class Public::OrdersController < ApplicationController
     @order.save
     flash[:notice] = "ご注文が確定しました。"
     redirect_to orders_thanks_path
-
-    # もし情報入力でnew_addressの場合ShippingAddressに保存
-    if params[:order][:ship] == "1"
-      current_customer.shipping_address.create(shipping_address_params)
-    end
 
     # オーダー確定後ユーザーのカートを削除する
     current_customer.cart_items.destroy_all
@@ -96,6 +98,6 @@ class Public::OrdersController < ApplicationController
     end
 
     def shipping_address_params
-      params.permit(:address, :name, :postal_code, :customer_id)
+      params.require(:order).permit(:address, :name, :postal_code, :customer_id)
     end
 end

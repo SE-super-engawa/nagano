@@ -1,6 +1,6 @@
 <h4>商品詳細</h4>
 
-<%= attachment_image_tag @product, :image, :fill, 100, 100, format: 'jpeg' %>
+<%= attachment_image_tag @product, :image, :fill, 500, 500, format: 'jpeg' %>
 
   <h4>商品名</h4>
   <%= @product.name %>
@@ -11,8 +11,9 @@
   <%= @product.genre.name %>
   
   <h4>税込価格（税抜価格）</h4>
-  <%= @product.price*1.1 ,(product.price) %>
-  
+  <!--税込価格のやり方確認-->
+  <%#= @product.price*1.1 ,(product.price) %>
+  <%= @product.price*1.1 %>円
   <h4>販売ステータス</h4>
   <%= @product.is_active %>
 

@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_many :order_products, dependent: :destroy
   belongs_to :genre, dependent: :destroy
 
-  attachment :image_id
+  attachment :image
 
   validates :name, :genre_id, :price, presence: true
   validates :price, numericality: { only_integer: true }
