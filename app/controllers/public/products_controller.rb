@@ -11,7 +11,7 @@ class Public::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @products = Product.all
     @cart_item = CartItem.new
-    
+
   end
 
   private

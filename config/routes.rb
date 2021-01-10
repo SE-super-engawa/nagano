@@ -1,12 +1,23 @@
 Rails.application.routes.draw do
 
-  devise_for :admins
+  get 'admin' => 'homes#top', as: 'homes'
+  get 'sessions/new'
+  get 'sessions/crete'
+  get 'sessions/destroy'
+
+  devise_for :admin
 
   devise_for :customers, controllers: {
     sessions: 'public/customers/sessions',
     passwords: 'public/customers/passwords',
     registrations: 'public/customers/registrations'
   }
+
+  namespace :admin do
+    resources :genres, except:[:new, :show, :destroy]
+    resources :products,only: [:index, :show, :new, :create, :edit, :update]
+  end
+
 
   scope module: :public do
     root to: 'homes#top'
@@ -30,5 +41,4 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :index, :show, :create]
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

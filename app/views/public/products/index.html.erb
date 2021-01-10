@@ -8,12 +8,12 @@
           <%= @products.each do |product| %>
             <div class="product-container">
               <%= link_to product_path(product.id), class: "btn-link" do %>
-              <%= attachment_image_tag product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+              <%= attachment_image_tag product, :image_id, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
               <%= product.name %>
               <% end %>
               <% if product.is_active == true %>
                 <!--税込価格の表示-->
-                <p>¥ <%= product.price.to_s(:delimited) %></p>     
+                <p>¥ <%= product.price.to_s(:delimited) %></p>
               <% elsif product.is_active == false %>
                 <p class="text-danger">売り切れ中</p>
               <% end %>
