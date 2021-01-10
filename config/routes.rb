@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+   resources :order_products, only:[:update]
+  end
   devise_for :admins
 
   devise_for :customers, controllers: {
