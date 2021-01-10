@@ -26,7 +26,7 @@ class Public::CartItemsController < ApplicationController
   def update
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
     flash.now[:success] = "#{@cart_item.product.name}の数量を変更しました"
-    @cart_items = current_cart
+    @cart_items = current_customer.cart_items
     @price = sumprice(@cart_item).to_s(:delimited)
     #@total = total_price(@cart_items).to_s(:delimited)   #税抜カラムのみで税込価格・小計・合計価格どうしよ・・・
     redirect_to customers_cart_items_path
