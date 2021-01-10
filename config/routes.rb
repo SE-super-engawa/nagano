@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
 
   namespace :admin do
     resources :orders, only:[ :index, :show,:update]
+=======
+  namespace :admin do
+    resources :customers, only:[:index, :show, :edit, :update]
+>>>>>>> 91bc8255f41aff3e10a7e4fabed93f295739d3fc
   end
   
   devise_for :admins

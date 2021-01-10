@@ -2,8 +2,7 @@
 <table>
   <tr>
     <td>購入者</td>
-    <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",root_path,class:"text-dark"%></u></td>
-    <!-- admin_customer_path(@order.customer)% cusromerとmergeしていないため↑を仮適用-->
+    <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",admin_customer_path(@order.customer)%,class:"text-dark"%></u></td>
   </tr>
   <tr>
     <td>注文日</td>
@@ -21,10 +20,10 @@
     <td>注文ステータス</td>
       <td>
         <%= form_with model:@order, method: :post, local:true do |f| %>
-          <%= f.select :status, Order.statuses.keys.map{|k| [k,k]}%>
+          <%= f.select :status, Order.statuses.keys.map{|k|[I18n.t("enums.order.status.#{k}"), k]}%>
         <% end %>
       </td>
-    <td><%= link_to "更新",admin_order_path(@order),method: :patch %></td>
+    <td><%= link_to "更新",admin_order_path(@order),method: :patch,class:"btn btn-success" %></td>
   </tr>
 </table>
 <table>
@@ -47,8 +46,8 @@ order.productsと
     <td><%= order_product.quantity %></td>
     <td><%= order_product.price*order_product.quantity %></td>
     <td>
-        <%= form_with order_product, method: :post do |f| %>
-          <%= f.select :status, OrderProduct.making_status.keys, {} %>
+        <%= form_with model:@order_product, method: :post do |f| %>
+          <%= f.select :making_status, OrderProduct.making_statuses.keys.map{|k|[I18n.t("enums.order_product.status.#{k}"), k]}%>
         <% end %>
         <%= link_to "更新",admin_order_path(@order),method: :patch %></td>
     </td>
