@@ -15,8 +15,9 @@ class Admin::OrdersController < ApplicationController
     @order.order_products each do |order_product|
       @total_price += order_product.price*order_product.quantity
     end
+    @invice_fee = @total_price + @order.shipping_fee
   end
-
   def update
   end
+  
 end

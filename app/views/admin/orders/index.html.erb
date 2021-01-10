@@ -8,15 +8,15 @@
   </tr>
   <% sum = 0 %>
   <% @orders.each do |order| %>
-  <tr>
-    <td><%=link_to "#{order.created_at}",admin_order_path(order) %></td>
-    <td><%=order.customer.name %></td>
-    <% order.order_items.each do |order_item| %>
-      <% sum += order_item.quantity %>
-    <% end %>
-    <td><%= sum %></td>
-    <td><%=order.status %></td>
-  </tr>
+    <tr>
+      <td><%=link_to "#{order.created_strftime("%Y/%m/%d/%H:%M:%S")}",admin_order_path(order) %></td>
+      <td><%=order.customer.name %></td>
+      <% order.order_items.each do |order_item| %>
+        <% sum += order_item.quantity %>
+      <% end %>
+      <td><%= sum %></td>
+      <td><%=order.status %></td>
+    </tr>
   <% end %>
 </table>
 <%= paginate @orders %>
