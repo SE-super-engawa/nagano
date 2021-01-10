@@ -4,13 +4,9 @@ class Public::Customers::SessionsController < Devise::SessionsController
   # before_action :reject_customer, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
-<<<<<<< HEAD
-#   def after_sign_in_path_for(resource)
-#     customers_my_page_path
-# end
-=======
-
->>>>>>> 4bc745fe96be7f5d39439554ff36f88ff5a20f67
+  def after_sign_in_path_for(resource)
+    customers_my_page_path
+  end
 
   # GET /resource/sign_in
   # def new
