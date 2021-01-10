@@ -6,5 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
- Admin.create(:email => 'k@k', :encrypted_password => 'kkk')
- Product.create(:name =>'ケーキ', :description => '111', :price => '1000', :is_active => 'true')
+ Admin.create(:email => 'k@k', :password => 'kkkkkk')
