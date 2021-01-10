@@ -1,6 +1,6 @@
 class OrderProduct < ApplicationRecord
-# belongs_to :product
-# belongs_to :order
+belongs_to :product
+belongs_to :order
 
 enum making_status:{
 cannot_be_manufactured: 0,#着手不可

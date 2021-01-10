@@ -15,7 +15,18 @@ class Admin::OrdersController < ApplicationController
    
     @invice_fee = @total_price + @order.shipping_fee
   end
+  
   def update
+    order = Order.find(params[:id])
+    if order.update(order_params)
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to root_path
+    end  
+  end
+  
+  def order_params
+    params.permit(:status)
   end
   
 end
