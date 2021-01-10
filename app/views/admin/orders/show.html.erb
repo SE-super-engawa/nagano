@@ -2,11 +2,12 @@
 <table>
   <tr>
     <td>購入者</td>
-    <td><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",admin_customer_path(@order.customer) %></td>
+    <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",root_path,class:"text-dark"%></u></td>
+    <!-- admin_customer_path(@order.customer)% cusromerとmergeしていないため↑を仮適用-->
   </tr>
   <tr>
     <td>注文日</td>
-    <td><%= @order.created_at("%Y/%m/%d") %></td>
+    <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
   </tr>
   <tr>
     <td>配送先</td>
@@ -14,13 +15,13 @@
   </tr>
   <tr>
     <td>支払方法</td>
-    <td><%= @order.payment %></td>
+    <td><%= @order.payment_i18n %></td>
   </tr>
   <tr>
     <td>注文ステータス</td>
       <td>
-        <%= form_with @order, method: :post do |f| %>
-          <%= f.select :status, Order.status.keys, {} %>
+        <%= form_with model:@order, method: :post, local:true do |f| %>
+          <%= f.select :status, Order.statuses.keys.map{|k| [k,k]}%>
         <% end %>
       </td>
     <td><%= link_to "更新",admin_order_path(@order),method: :patch %></td>
@@ -34,6 +35,11 @@
     <td>小計</td>
     <td>製作ステータス</td>
   </tr>
+
+<% 
+=begin
+%>
+order.productsと
   <% @order.order_products each do |order_product| %>
   <tr>
     <td><%= order_product.products.name %></td>
@@ -53,3 +59,7 @@
 <span>商品合計<%= @total_price %>円</span>
 <span>送料<%= @order.shipping_fee %>円</span>
 <span>請求金額<%= @invice_fee %>円</span>
+
+<%
+=end
+%>

@@ -10,11 +10,9 @@ class Admin::OrdersController < ApplicationController
   end
   
   def show
-    @order = Order(params[:id])
+    @order = Order.find(params[:id])
     @total_price = 0
-    @order.order_products each do |order_product|
-      @total_price += order_product.price*order_product.quantity
-    end
+   
     @invice_fee = @total_price + @order.shipping_fee
   end
   def update

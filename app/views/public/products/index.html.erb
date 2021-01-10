@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h2>商品一覧</h2>
+        <span>（全<%= @products.count %>件）</span>
+
+        <div class="clearfix product-box">
+          <%= @products.each do |product| %>
+            <div class="product-container">
+              <%= link_to product_path(product.id), class: "btn-link" do %>
+              <%= attachment_image_tag product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+              <%= product.name %>
+              <!-- <%= product.price %>ではない、モデルかコントローラーで計算？-->
+              <!--.to_s(:delimited)使用？-->
+            </div>
+        </div>
+
+        <div class="pagination">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>Next></p>
+          <p>Last>></p>
+        </div>
+
+    </div>
+  </div>
+</div>
