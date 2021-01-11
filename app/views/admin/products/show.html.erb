@@ -1,20 +1,43 @@
-<h4>商品詳細</h4>
+<div class="container">
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-10">
 
+<h3>商品詳細</h3>
+
+<table>
 <%= attachment_image_tag @product, :image, :fill, 500, 500, format: 'jpeg' %>
-
-  <h4>商品名</h4>
-  <%= @product.name %>
-  <h4>商品説明</h4>
-  <%= @product.description %> 
   
-  <h4>ジャンル名</h4>
-  <%= @product.genre.name %>
+  <tr>
+  <th>商品名</th>
+  <th><%= @product.name %></th>
+  </tr>
   
-  <h4>税込価格（税抜価格）</h4>
-  <!--税込価格のやり方確認-->
-  <%#= @product.price*1.1 ,(product.price) %>
-  <%= (@product.price*1.1).round(0) %> (<%= @product.price%>)円
-  <h4>販売ステータス</h4>
-  <%= @product.is_active %>
+  <tr>
+  <th>商品説明</th>
+  <th><%= @product.description %></th>
+  </tr>
+  
+  <tr>
+  <th>ジャンル名</th>
+  <th><%= @product.genre.name %></th>
+  </tr>
+  
+  <tr>
+  <th>税込価格（税抜価格）</th>
+  <th><%= (@product.price*1.1).round(0) %> (<%= @product.price%>)円</th>
+  </tr>
+  
+  <tr>
+  <th>販売ステータス</th>
+  <th><%= @product.is_active %></th>
+  </tr>
 
-<%= link_to "編集する", edit_admin_product_path(@product),class:'btn btn-success'  %>
+  <tr>
+  <th><%= link_to "編集する", edit_admin_product_path(@product),class:'btn btn-success'  %></th>
+  </tr>
+
+</table>
+</div>
+</div>
+</div>
