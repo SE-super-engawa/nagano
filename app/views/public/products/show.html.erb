@@ -13,22 +13,27 @@
       <div class="product-price">
         <br>
         <br>
-        <h4>¥ <%= @product.tax_price.to_s(:delimited) %>
+        <h4>¥ <%= @product.price.to_s(:delimited) %>
         <span>(税込)</span>
         </h4>
       </div>
+
+      <% if flash[:notice] %>
+        <p><%= flash[:notice] %></p>
+      <% end %>
 
       <div class="field">
         <br>
         <br>
         <% if @product.is_active == true %>
           <% if @product.genre.is_active == true %>
-            <%= form_with model: @cart_item, url: customers_cart_items_path, method: post do |f| %>
+            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+              <%= f.hidden_field :product_id, :value => @product.id %>
               <%= f.select :quantity, options_for_select((1..10).to_a), include_blank: "個数選択" %>
               <%= f.submit "カートに入れる", class: 'btn btn-success' %>
             <% end %>
           <% else %>
-            <h4 class="text-danger">販売停止中</h4>
+            <h4 class="text-danger">販売停止</h4>
           <% end %>
         <% elsif @product.is_active == false %>
           <h4 class="text-danger">販売停止中</h4>

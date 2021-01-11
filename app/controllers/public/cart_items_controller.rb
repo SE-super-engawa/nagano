@@ -8,26 +8,29 @@ class Public::CartItemsController < ApplicationController
 
   def create
     @cart_item = current_customer.cart_items.new(params_cart_item)
-    @update_cart_item = CartItem.find_by(product: @cart_item.product)     #カート内商品の重複を避け、商品の合計個数を出す
-    if @update_cart_item.present? && @cart_item.is_active?
-      @cart_item.quantity += @update_cart_item.quantity
-      @update_cart_item.destroy
+    @update_cart_item = CartItem.find_by(product_id: @cart_item.product.id, customer_id: current_customer.id)     #カート内商品の重複を避け、商品の合計個数を出す
+    if @update_cart_item
+      @update_cart_item.quantity += @cart_item.quantity
+      @update_cart_item.save
+      redirect_to products_path
     end
-　　if @cart_item.save
-　　  flash[:notice] = "#{@cart_item.product.name}をカートに追加しました"
-　　  redirect_to products_path
-　　else
-　　  @product = Product.find(params[:cart_item][:product_id])     #もし個数選択をしていなかったら商品詳細に遷移後、個数選択をさせる
-　　  @cart_item = CartItem.new
-      flash[:alert] = "個数を選択してください"
+    p @cart_item
+    if @cart_item.save
+      flash[:notice] = "商品を入れました"
+      redirect_to products_path
+    else
+      @product = Product.find(params[:cart_item][:product_id])
+      @cart_item = CartItem.new
+      flash[:notice] = "個数を選択してください"
       render "public/products/show"
+    end
   end
 
   def update
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
     flash.now[:success] = "#{@cart_item.product.name}の数量を変更しました"
     @cart_items = current_customer.cart_items
-    @price = sumprice(@cart_item).to_s(:delimited)
+    @price = sumprice(@cart_item).to_s(:delimited)   #←ここも謎
     #@total = total_price(@cart_items).to_s(:delimited)   #税抜カラムのみで税込価格・小計・合計価格どうしよ・・・
     redirect_to customers_cart_items_path
   end
