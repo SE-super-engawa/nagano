@@ -1,18 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
-      <h2>商品一覧</h2>
-        <span>（全<%= @products.count %>件）</span>
+      <h2 class="p-3">商品一覧 <span>（全<%= @products.count %>件）</span></h2>
 
         <div class="clearfix product-box">
-          <%= @products.each do |product| %>
+          <% @products.each do |product| %>
             <div class="product-container">
               <%= link_to product_path(product.id), class: "btn-link" do %>
-              <%= attachment_image_tag product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+              <%= attachment_image_tag product, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
               <%= product.name %>
-              <!-- <%= product.price %>ではない、モデルかコントローラーで計算？-->
-              <!--.to_s(:delimited)使用？-->
+              <% end %>
+              <% if product.is_active == true %>
+                <!--税込価格の表示-->
+                <p>¥ <%= product.tax_price.to_s(:delimited) %></p>
+              <% elsif product.is_active == false %>
+                <p class="text-danger">売り切れ中</p>
+              <% end %>
             </div>
+          <% end %>
         </div>
 
         <div class="pagination">

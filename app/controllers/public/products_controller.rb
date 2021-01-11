@@ -4,13 +4,25 @@ class Public::ProductsController < ApplicationController
 
   def index
     @genres = Genre.all
-    @products = Product.where(is_active: true).page(params[:page]).per(8)     #販売中の商品のみ１ページにつき８個表示
+    @products = Product.all.page(params[:page]).per(8)   #もし販売中の商品のみ１ページにつき８個表示なら= Product.where(is_active: true).page(params[:page]).per(8)
+
+    #税込価格を表示
+    @products.each do |product|
+    @tax_price = product.price*1.1
+    end
   end
 
   def show
     @product = Product.find(params[:id])
     @products = Product.all
     @cart_item = CartItem.new
+
+    #税込価格を表示
+    @products.each do |product|
+    @tax_price = product.price*1.1
+    end
+
+
   end
 
   private
