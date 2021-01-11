@@ -14,9 +14,8 @@ class Public::CartItemsController < ApplicationController
       @update_cart_item.save
       redirect_to products_path
     end
-    p @cart_item
     if @cart_item.save
-      flash[:notice] = "商品を入れました"
+      flash[:notice] = "#{@cart_item.product.name}を入れました"
       redirect_to products_path
     else
       @product = Product.find(params[:cart_item][:product_id])
@@ -28,31 +27,29 @@ class Public::CartItemsController < ApplicationController
 
   def update
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
-    flash.now[:success] = "#{@cart_item.product.name}の数量を変更しました"
+    flash.now[:notice] = "#{@cart_item.product.name}の数量を変更しました"
     @cart_items = current_customer.cart_items
-    @price = sumprice(@cart_item).to_s(:delimited)   #←ここも謎
-    #@total = total_price(@cart_items).to_s(:delimited)   #税抜カラムのみで税込価格・小計・合計価格どうしよ・・・
-    redirect_to customers_cart_items_path
+    redirect_to cart_items_path
   end
 
   def destroy
+    @cart_items = current_customer.cart_items
+    @cart_item = CartItem.find(params[:cart_item][:product_id])
     @cart_item.destroy
-    flash.now[:alert] = "#{@cart_item.product.name}を削除しました"
-    @cart_items = current_cart
-    #@total = total_price(@cart_items).to_s(:delimited)     #謎。
-    redirect_to customers_cart_items_path
+    flash.now[:notice] = "#{@cart_item.product.name}を削除しました"
+    redirect_to cart_items_path
   end
 
   def destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
-    flash[:alert] = "カートの商品を全て削除しました"
-    redirect_to customers_cart_items_path
+    flash[:notice] = "カートの商品を全て削除しました"
+    redirect_to cart_items_path
   end
 
   private
 
   def params_cart_item
-    params.require(:cart_item).permit(:quantity, :product_id)
+    params.require(:cart_item).permit(:quantity, :product_id,:image)
   end
 end

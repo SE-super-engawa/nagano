@@ -7,6 +7,10 @@
           <%= link_to "カートを空にする", cart_items_path, method: :delete, data: {confirm: '本当にカートを空にしてよろしいですか？'}, class: "btn btn-danger" %>
         </div>
 
+        <% if flash[:notice] %>
+        <p><%= flash[:notice] %></p>
+      <% end %>
+
         <table class="table">
           <thead>
             <tr>
@@ -17,6 +21,7 @@
               <th></th>
             </tr>
           </thead>
+          <!--価格計算に必要な初期値の定義-->
           <% @total_price = 0 %>
           <tbody>
             <% @cart_items.each do |cart_item| %>
@@ -26,6 +31,7 @@
                 <%= cart_item.product.name %>
               </td>
               <td>
+                <!--税込価格の表示-->
                 <% tax_price = cart_item.product.price*1.1 %>
                 <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
               </td>
@@ -38,7 +44,7 @@
               <td>
                 <!--小計-->
                 <% sub_total_price = tax_price*cart_item.quantity %>
-                <p>¥ <%= sub_total_price %></p>
+                <p>¥ <%= sub_total_price.round.to_s(:delimited) %></p>
                 <% @total_price += sub_total_price %>
               </td>
               <td>
@@ -57,7 +63,8 @@
           <tbody>
             <tr>
               <td>
-                <p>¥ <%= @total_price %></p>
+                <!--合計金額の表示-->
+                <p>¥ <%= @total_price.round.to_s(:delimited) %></p>
               </td>
             </tr>
           </tbody>
