@@ -27,16 +27,16 @@ class Public::CartItemsController < ApplicationController
 
   def update
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
-    flash.now[:notice] = "#{@cart_item.product.name}の数量を変更しました"
+    flash[:notice] = "#{@cart_item.product.name}の数量を変更しました"
     @cart_items = current_customer.cart_items
     redirect_to cart_items_path
   end
 
   def destroy
     @cart_items = current_customer.cart_items
-    @cart_item = CartItem.find(params[:cart_item][:product_id])
+    @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
-    flash.now[:notice] = "#{@cart_item.product.name}を削除しました"
+    flash[:notice] = "#{@cart_item.product.name}を削除しました"
     redirect_to cart_items_path
   end
 
@@ -50,6 +50,6 @@ class Public::CartItemsController < ApplicationController
   private
 
   def params_cart_item
-    params.require(:cart_item).permit(:quantity, :product_id,:image)
+    params.require(:cart_item).permit(:quantity, :product_id)
   end
 end
