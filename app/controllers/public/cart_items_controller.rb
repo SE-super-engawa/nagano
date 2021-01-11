@@ -10,9 +10,8 @@ class Public::CartItemsController < ApplicationController
     @cart_item = current_customer.cart_items.new(params_cart_item)
     @update_cart_item = CartItem.find_by(product_id: @cart_item.product.id, customer_id: current_customer.id)     #カート内商品の重複を避け、商品の合計個数を出す
     if @update_cart_item
-      @update_cart_item.quantity += @cart_item.quantity
-      @update_cart_item.save
-      redirect_to products_path
+      @cart_item.quantity += @update_cart_item.quantity
+      @update_cart_item.destroy
     end
     if @cart_item.save
       flash[:notice] = "#{@cart_item.product.name}を入れました"
@@ -26,6 +25,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
+    @cart_item = CartItem.find(params[:id])
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
     flash[:notice] = "#{@cart_item.product.name}の数量を変更しました"
     @cart_items = current_customer.cart_items
