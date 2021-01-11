@@ -44,7 +44,7 @@
   <tr>
   <th><%= f.submit '新規登録', class:'btn btn-success' %></th>
   </tr>
-  
+
 <% end %>
 </table>
 
@@ -67,7 +67,15 @@
   <th><%= link_to product.name , admin_product_path(product.id) , class:'btn btn-link' %></th>
   <th><%= product.price.to_s(:delimited) %></th>
   <th><%= product.genre.name %></th>
-  <th><%= product.is_active %></th>
-</tr>
+  <th>
+    <% if (product.is_active == false ) %>
+          販売停止中
+    <% else %>
+          販売中
+    <% end %>
+  </th>
+
+  </tr>
   <% end %>
 </table>
+ <%#= paginate @products %>

@@ -5,12 +5,6 @@ class Product < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy
   has_many :order_products, dependent: :destroy
-  
-#   enum status:{
-#       true: 0, #販売中
-#       false: 1, #販売停止中
-#   }
-   
    
    
 end

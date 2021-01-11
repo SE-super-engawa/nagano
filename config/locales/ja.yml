@@ -11,7 +11,9 @@ ja:
         preparing_ship: "発送準備中"
         done_ship: "発送済み"
 
-  # product:
-  #   is_active:
-  #     true: "販売中"
-  #     false:　"販売停止中"
+  
+      making_status:
+        cannot_be_manufactured: "着手不可"
+        waiting_for_production: "製作待ち"
+        in_production: "製作中"
+        production_completed: "#製作完了"

@@ -1,0 +1,55 @@
+<div clss="container>
+  <div class="row">
+    <div class="col-md-11 offset-md-1 w-100">
+<h4>注文履歴詳細</h4>
+<%= form_with model:@order,url:"/admin/orders/#{@order.id}",local:true do |f| %>
+  <table>
+    <tr>
+      <td>購入者</td>
+      <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",admin_customer_path(@order.customer),class:"text-dark" %></u></td>
+    </tr>
+    <tr>
+      <td>注文日</td>
+      <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr>
+      <td>配送先</td>
+      <td>〒<%= @order.postal_code %><%= @order.address %></td>
+    </tr>
+    <tr>
+      <td>支払方法</td>
+      <td><%= @order.payment_i18n %></td>
+    </tr>
+    <tr>
+      <td>注文ステータス</td>
+      <td><%= f.select :status, Order.statuses.keys.map{|k|[I18n.t("enums.order.status.#{k}"), k]}%></td>
+      <td><%= f.submit '更新',class:"btn btn-success text-white" %></td>
+    </tr>
+  </table>
+<% end %>
+<table>
+  <tr>
+    <td>商品名</td>
+    <td>単価(税込)</td>
+    <td>数量</td>
+    <td>小計</td>
+    <td>製作ステータス</td>
+  </tr>
+  
+  <% @order_products.each do |order_product| %>
+    <%= form_with model:order_product,local:true do |f| %>
+      <tr>
+        <td><%= order_product.products.name %></td>
+        <td><%= order_product.price %></td>
+        <td><%= order_product.quantity %></td>
+        <td><%= order_product.price*order_product.quantity %></td>
+        <td><%= f.select :status, OrderProduct.making_statuses.keys.map{|k|[I18n.t("enums.order_product.making_status.#{k}"), k]}%></td>
+        <td><%= f.submit '更新',class:"btn btn-success text-white" %></td>
+      </tr>
+     <% end %>
+  <% end %>
+</table>
+
+<span>商品合計<%= @total_price %>円</span>
+<span>送料<%= @order.shipping_fee %>円</span>
+<span>請求金額<%= @invice_fee %>円</span>

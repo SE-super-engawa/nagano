@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
 
-
+  namespace :admin do
+    resources :orders, only:[ :index, :show,:update]
+    resources :customers, only:[:index, :show, :edit, :update]
+    resources :order_products, only:[:update]
+  end
 
   get '/admin' => 'admin/homes#top', as: 'homes'
   get 'sessions/new'
   get 'sessions/crete'
   get 'sessions/destroy'
 
-  devise_for :admin
+  devise_for :admins
 
   devise_for :customers, controllers: {
     sessions: 'public/customers/sessions',

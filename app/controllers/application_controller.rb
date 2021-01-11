@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
     customers_my_page_path
   end
 
+  # def after_sign_in_path_for(resource)
+  #   admin_orders_path
+  # end
 
 
   def configure_permitted_parameters
