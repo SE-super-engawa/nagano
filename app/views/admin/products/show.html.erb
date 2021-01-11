@@ -13,7 +13,7 @@
   <h4>税込価格（税抜価格）</h4>
   <!--税込価格のやり方確認-->
   <%#= @product.price*1.1 ,(product.price) %>
-  <%= @product.price*1.1 %>円
+  <%= (@product.price*1.1).round(0) %> (<%= @product.price%>)円
   <h4>販売ステータス</h4>
   <%= @product.is_active %>
 

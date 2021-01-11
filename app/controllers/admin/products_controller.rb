@@ -33,6 +33,7 @@ class Admin::ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to admin_product_path(@product.id)
     else
+      render :index
     end
   end
 

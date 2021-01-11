@@ -48,6 +48,10 @@
   <h4>販売ステータス</h4>
   <label><%= f.radio_button :is_active, true, checked: "checked" %> 販売中 </label>
   <label><%= f.radio_button :is_active, false %> 販売停止中</label>
+
+ <%#= f.radio_button :status, Product.is_actives.keys.map {|k| [I18n.t("enums.product.status.#{k}"), k]}, checked: "checked" %>
+ <%#= f.radio_button :status, Product.is_actives.keys.map {|k| [I18n.t("enums.product.status.#{k}"), k]} %>
+ 
 </br>
   <%= f.submit '新規登録', class:'btn btn-success' %>
 

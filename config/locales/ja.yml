@@ -10,3 +10,8 @@ ja:
         in_production: "製作中"
         preparing_ship: "発送準備中"
         done_ship: "発送済み"
+
+  # product:
+  #   is_active:
+  #     true: "販売中"
+  #     false:　"販売停止中"
