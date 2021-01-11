@@ -21,8 +21,12 @@
         </h4>
       </div>
 
-      <% if flash[:notice] %>
-        <p><%= flash[:notice] %></p>
+      <br>
+      <!--フラッシュメッセージ-->
+      <% flash.each do |key, value| %>
+        <p class="alert alert-<%= key %>">
+          <%= value %>
+        </p>
       <% end %>
 
       <div class="field">
@@ -36,7 +40,7 @@
               <%= f.submit "カートに入れる", class: 'btn btn-success' %>
             <% end %>
           <% else %>
-            <h4 class="text-danger">販売停止</h4>
+            <h4 class="text-danger">販売停止中</h4>
           <% end %>
         <% elsif @product.is_active == false %>
           <h4 class="text-danger">販売停止中</h4>

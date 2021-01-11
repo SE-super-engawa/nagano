@@ -1,24 +1,31 @@
 <div class="container">
-  <h2 class="row p-3">ショッピングカート</h2>
+  <h2 class="row p-3">ショッピングカート
 
-    <div class="col-xs-11">
-      <% if @cart_items.present? %>
+    <% if @cart_items.present? %>
         <div class="pull-right margin-bottom">
           <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, data: {confirm: '本当にカートを空にしてよろしいですか？'}, class: "btn btn-danger" %>
         </div>
 
-        <% if flash[:notice] %>
-        <p><%= flash[:notice] %></p>
-      <% end %>
+  </h2>
 
-        <table class="table">
+    <!--フラッシュメッセージ-->
+    <% flash.each do |key, value| %>
+          <p class="alert alert-<%= key %>">
+            <%= value %>
+          </p>
+        <% end %>
+
+    <div class="col-xs-11">
+
+
+        <table class="table table-sm table-bordered border-dark">
           <thead>
             <tr>
-              <th>商品名</th>
-              <th>単価（税込）</th>
-              <th>数量</th>
-              <th>小計</th>
-              <th></th>
+              <th class="table-active">商品名</th>
+              <th class="table-active">単価（税込）</th>
+              <th class="table-active">数量</th>
+              <th class="table-active">小計</th>
+              <th class="table-active"></th>
             </tr>
           </thead>
           <!--価格計算に必要な初期値の定義-->
@@ -54,22 +61,20 @@
             <% end %>
           </tbody>
         </table>
-        <table class="table">
-          <thead>
+
+        <div class="col-4">
+          <table class="table table-sm table-bordered">
             <tr>
-              <th>合計金額</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
+              <th class="tablehead">合計金額</th>
               <td>
-                <!--合計金額の表示-->
-                <p>¥ <%= @total_price.round.to_s(:delimited) %></p>
-              </td>
+              <!--合計金額の表示-->
+              <p>¥ <%= @total_price.round.to_s(:delimited) %></p>
+            </td>
             </tr>
-          </tbody>
-        </table>
+          </table>
+        </div>
     </div>
+
     <div class="col-md-4 col-md-offset-4 text-center">
       <%= link_to "買い物を続ける", products_path, class: "btn btn-primary" %>
     </div>
