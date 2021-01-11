@@ -10,9 +10,11 @@
               <%= link_to product_path(product.id), class: "btn-link" do %>
               <%= attachment_image_tag product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
               <%= product.name %>
+              <% end %>
               <!-- <%= product.price %>ではない、モデルかコントローラーで計算？-->
               <!--.to_s(:delimited)使用？-->
             </div>
+          <% end %>
         </div>
 
         <div class="pagination">
