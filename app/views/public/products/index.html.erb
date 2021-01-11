@@ -12,7 +12,8 @@
               <% end %>
               <% if product.is_active == true %>
                 <!--税込価格の表示-->
-                <p>¥ <%= product.tax_price.to_s(:delimited) %></p>
+                <% tax_price = product.price*1.1 %>
+                <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
               <% elsif product.is_active == false %>
                 <p class="text-danger">売り切れ中</p>
               <% end %>

@@ -25,7 +25,8 @@
                 <%= product.name %>
                 <% end %>
                 <!--税込価格を表示-->
-                <p>¥ <%= product.tax_price.to_s(:delimited) %></p>
+                <% tax_price = product.price*1.1 %>
+                <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
               </div>
             <% end %>
         </div>
