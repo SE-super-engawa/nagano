@@ -1,36 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-10">
       <h2 class="p-3">商品一覧 <span>（全<%= @products.count %>件）</span></h2>
-
-        <div class="clearfix product-box">
-          <% @products.each do |product| %>
-            <div class="product-container">
-              <%= link_to product_path(product.id), class: "btn-link" do %>
-              <%= attachment_image_tag product, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
-              <%= product.name %>
-              <% end %>
-
-              <% if product.is_active == true %>
-                <!--税込価格の表示-->
-                <% tax_price = product.price*1.1 %>
-                <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
-              <% elsif product.is_active == false %>
-                <p class="text-danger">販売停止中</p>
-              <% end %>
-
-            </div>
-          <% end %>
-        </div>
-
-        <div class="pagination">
-          <p>1</p>
-          <p>2</p>
-          <p>3</p>
-          <p>Next></p>
-          <p>Last>></p>
-        </div>
-
     </div>
   </div>
+
+  <div class="row">
+    <div class="d-flex my-box-light flex-wrap mb-2">
+      <% @products.each do |product| %>
+        <div class="product-container m-3">
+          <%= link_to product_path(product.id), class: "btn-link" do %>
+            <%= attachment_image_tag product, :image, :fill, 230, 180, format: 'jpeg', fallback: "no_image.jpg" %>
+            <br>
+            <br>
+            <%= product.name %>
+          <% end %>
+
+          <% if product.is_active == true %>
+            <!--税込価格の表示-->
+            <% tax_price = product.price*1.1 %>
+            <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
+          <% elsif product.is_active == false %>
+            <p class="text-danger">販売停止中</p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row content">
+    <div class="col-12 text-center">
+      <div class="pagination">
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>Next></p>
+        <p>Last>></p>
+      </div>
+    </div>
+  </div>
+
 </div>
