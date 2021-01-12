@@ -1,7 +1,5 @@
 class Public::ProductsController < ApplicationController
 
-  before_action :authenticate_customer!, only: [:show]     #ログインしてない人は閲覧のみ
-
   def index
     @genres = Genre.all
     @products = Product.all
