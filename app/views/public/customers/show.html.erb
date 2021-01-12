@@ -9,20 +9,40 @@
 
   <div class="row">
     <table class="table table-sm table-bordered border-dark col-8">
-      <tr><th scope="col" class="table-active" style="width:150px">氏名</th>           <td><%= @customer.family_name + "　" +  @customer.first_name  %></td></tr>
-      <tr><th scope="col" class="table-active">カナ</th>           <td><%= @customer.family_name_kana + "　" + @customer.first_name_kana  %></td></tr>
-      <tr><th scope="col" class="table-active">郵便番号</th>       <td><%= @customer.postal_code %></td></tr>
-      <tr><th scope="col" class="table-active">住所</th>           <td><%= @customer.address %></td></tr>
-      <tr><th scope="col" class="table-active">電話番号</th>       <td><%= @customer.phone_number %></td></tr>
-      <tr><th scope="col" class="table-active">メールアドレス</th> <td><%= @customer.email %></td></tr>
+      <tr>
+        <th scope="col" class="table-active" style="width:150px">氏名</th>
+        <td><%= @customer.family_name + "　" +  @customer.first_name  %></td>
+      </tr>
+      <tr>
+        <th scope="col" class="table-active">カナ</th>
+        <td><%= @customer.family_name_kana + "　" + @customer.first_name_kana  %></td>
+      </tr>
+      <tr>
+        <th scope="col" class="table-active">郵便番号</th>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+      <tr>
+        <th scope="col" class="table-active">住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <th scope="col" class="table-active">電話番号</th>
+        <td><%= @customer.phone_number %></td>
+      </tr>
+      <tr>
+        <th scope="col" class="table-active">メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
     </table>
   </div>
 
   <div class="row">
-    <h5 class="col-2 mt-3"><strong>配送先</strong></h5><%= link_to '一覧を見る', shipping_addresses_path,  class:'btn btn-sm btn-primary col-2 mt-3 ml-3' %>
+    <h5 class="col-2 mt-3"><strong>配送先</strong></h5>
+    <%= link_to '一覧を見る', shipping_addresses_path,  class:'btn btn-sm btn-primary col-2 mt-3 ml-3' %>
   </div>
 
   <div class="row">
-    <h5 class="col-2 mt-3"><strong>注文履歴</strong></h5><%= link_to '一覧を見る', orders_path,  class:'btn btn-sm btn-primary col-2 mt-3 ml-3' %>
+    <h5 class="col-2 mt-3"><strong>注文履歴</strong></h5>
+    <%= link_to '一覧を見る', orders_path,  class:'btn btn-sm btn-primary col-2 mt-3 ml-3' %>
   </div>
 </div>

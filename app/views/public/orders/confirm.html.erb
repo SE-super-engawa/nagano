@@ -3,50 +3,53 @@
 
 <div class="row">
   <div class="col-8">
-  <table class="table table-sm table-bordered">
-    <tr>
-      <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-    <% @cart_items.each do |cart_item| %>
+    <table class="table table-sm table-bordered">
       <tr>
-        <td><%= attachment_image_tag(cart_item.products, :image, size: "60x50", fallback: "no_image.jpg") %>
-            <%= cart_item.products.name %></td>
-        <td><%= cart_item.products.price.to_s(:delimited)  %>円</td>
-        <td><%= cart_item.quantity %></td>
-        <td><%= cart_item.subtotal.to_s(:delimited) %>円</td>
+        <th class="table-active">商品名</th>
+        <th class="table-active">単価（税込）</th>
+        <th class="table-active">数量</th>
+        <th class="table-active">小計</th>
+      <% @total_price = 0 %>
       </tr>
-    <% end %>
-  </table>
-  </div>
-
-  <div class="col-4">
-  <table class="table table-sm table-bordered">
-    <%= form_for(@order, url: orders_path)do |f| %>
-    <%# OrderedProductに送信 %>
       <% @cart_items.each do |cart_item| %>
-        <%= f.fields_for :order_products do |ord| %>
-          <%= ord.hidden_field :product_id, :value => cart_item.product.id %>
-          <%= ord.hidden_field :quantity, :value => cart_item.quantity %>
-          <%= ord.hidden_field :price, :value => cart_item.subtotal %>
-      　<% end %>
-      <% end %>
-    　<tr>
-        <th class="tablehead">送料</th>
-        <td><%= @order.shipping_fee.to_s(:delimited) %>円</td>
-            </tr>
-            <tr>
-              <th class="tablehead">商品合計</th>
-              <td><%= @total_price.to_s(:delimited) %>円</td>
-            </tr>
+        <tr>
+          <td><%= attachment_image_tag(cart_item.product, :image, size: "60x50", fallback: "no_image.jpg") %>
+              <%= cart_item.product.name %></td>
+          <td>
+            <% tax_price = (cart_item.product.price * 1.1).to_i %>
+            <%= tax_price.to_s(:delimited) %>
+          </td>
+          <td><%= cart_item.quantity %></td>
+          <!--小計-->
+          <td><% sub_total_price = tax_price * cart_item.quantity %>
+              <%= sub_total_price.to_s(:delimited) %>
+              <% @total_price += sub_total_price %>
+          </td>
+        </tr>
+   　  <% end %>
+    </table>
+    </div>
 
-            <tr>
-              <th class="tablehead">請求金額</th>
-              <td><%= @order_total_price.to_s(:delimited) %>円</td>
-            </tr>
-      </table>
+    <div class="col-4">
+    <table class="table table-sm table-bordered">
+      <tr>
+        <th class="table-active">送料</th>
+          <td><%= @order.shipping_fee %></td>
+      </tr>
+      <tr>
+        <th class="table-active">商品合計</th>
+          <td>
+            <%= @total_price.to_s(:delimited) %>
+          </td>
+      </tr>
+      <tr>
+        <th class="table-active">請求金額</th>
+          <td>
+            <% @finish_price = @total_price + 800 %>
+            <%= @finish_price.to_s(:delimited) %>
+          </td>
+        </tr>
+    </table>
     </div>
   </div>
 
@@ -73,18 +76,19 @@
   </div>
 
   <%# Orderに送信 %>
-  <%= f.hidden_field :customer_id, :value => current_customer.id %>
-  <%= f.hidden_field :name, :value => @order.name %>
-  <%= f.hidden_field :postal_code, :value => @order.postal_code %>
-  <%= f.hidden_field :address, :value => @order.address %>
-  <%= f.hidden_field :total_price, :value => @order_total_price %>
-  <%= f.hidden_field :payment %>
+  <%= form_for @order do |f| %>
+    <%= f.hidden_field :customer_id, :value => current_customer.id %>
+    <%= f.hidden_field :name, :value => @order.name %>
+    <%= f.hidden_field :postal_code, :value => @order.postal_code %>
+    <%= f.hidden_field :address, :value => @order.address %>
+    <%= f.hidden_field :total_price, :value => @total_price %>
+    <%= f.hidden_field :payment, :value => @order.payment %>
+
 
   <div class="row">
     <div class="col-3 offset-4 mt-3">
       <%= f.submit '購入を確定する', class: "btn btn-success" %>
     </div>
   </div>
-  <% end %>
-
+<% end %>
 </div>
