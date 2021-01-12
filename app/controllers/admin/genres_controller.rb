@@ -9,6 +9,7 @@ class Admin::GenresController < ApplicationController
 
   def index
     @genres =Genre.all
+    @genre =Genre.new
   end
 
   def edit
@@ -27,7 +28,12 @@ class Admin::GenresController < ApplicationController
 
 private
  def genre_params
-   params.require(:genre).permit(:name)
+   params.require(:genre).permit(:name, :is_active)
  end
 
 end
+
+
+=begin
+ {"name"=>"ケーキ", "is_active"=>"true", "commit"=>"新規登録"}
+=end
