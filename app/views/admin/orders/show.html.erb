@@ -37,7 +37,7 @@
   </tr>
   
   <% @order_products.each do |order_product| %>
-    <%= form_with model:order_product,url:"/admin/orders/#{@order.id}",local:true do |f| %>
+    <%= form_with model:order_product,url:admin_order_product_path(order_product),local:true do |f| %>
       <tr>
         <td><%= order_product.product.name %></td>
         <td><%= order_product.price %></td>
