@@ -51,10 +51,8 @@ class Public::OrdersController < ApplicationController
       end
       # オーダー確定後ユーザーのカートを削除する
       @cart_items.destroy_all
-      flash[:notice] = "ご注文が確定しました。"
-
+      flash[:success] = "ご注文が確定しました。"
       redirect_to orders_thanks_path
-
     else
       @order.customer_id = current_customer.id
       render :new
