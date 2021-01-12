@@ -28,7 +28,7 @@
         <!--顧客がログインしている場合-->
         <% if customer_signed_in? %>
           <div class="customer-name p-3">
-            ようこそ、さん！
+            ようこそ、<%= current_customer.family_name %>さん！
           </div>
           </div>
            <ul class="nav navbar-expand-lg navbar-right">
@@ -88,12 +88,21 @@
   });
 　</script>
 
+  <div class="container">
+    <!--フラッシュメッセージ-->
+    <% flash.each do |key, value| %>
+      <p class="alert alert-<%= key %> mt-3">
+        <%= value %>
+      </p>
+    <% end %>
     <%= yield %>
+  </div>
 
-    <footer class="text-center">
-      <p>© All rights reserved by Super Engawa (SE).</p>
-    </footer>
+  <footer class="shadow-sm mt-5">
+    <div class="container-fluid">
+      <p class="text-muted text-center"> © All rights reserved by Super Engawa (SE).</p>
+    </div>
+  </footer>
 
-
-  </body>
+ </body>
 </html>

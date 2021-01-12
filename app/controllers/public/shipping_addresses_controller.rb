@@ -7,8 +7,12 @@ class Public::ShippingAddressesController < ApplicationController
   def create
     @shipping_address = ShippingAddress.new(shipping_address_params)
     @shipping_address.customer_id = current_customer.id
-    @shipping_address.save
-    redirect_to shipping_addresses_path, success:"新しい配送先を登録しました。"
+    if @shipping_address.save
+      redirect_to shipping_addresses_path, success:"新しい配送先を登録しました。"
+    else
+      @shipping_addresses = ShippingAddress.all
+      render :index
+    end
   end
 
   def edit
@@ -28,7 +32,7 @@ class Public::ShippingAddressesController < ApplicationController
   def destroy
     @shipping_address = ShippingAddress.find(params[:id])
 	  @shipping_address.destroy
-    flash.now[:alert] = "配送先を削除しました"
+    flash[:info] = "配送先を削除しました"
 	  redirect_to shipping_addresses_path
   end
 
