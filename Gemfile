@@ -59,3 +59,4 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'rails-i18n'
 gem 'enum_help' #enum　日本語変換
+gem 'pry-byebug'
