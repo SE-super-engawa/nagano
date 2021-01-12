@@ -17,7 +17,7 @@
               <div class="navbar-brand p-3">
                 <!--ロゴの遷移先-->
                   <% if admin_signed_in? %>
-                    <%= link_to "ながのCAKE", admin_top_path, class: "fas fa-birthday-cake" %>
+                    <%= link_to "ながのCAKE", homes_path, class: "fas fa-birthday-cake" %>
                   <% else %>
                     <%= link_to "ながのCAKE", root_path, class: "fas fa-birthday-cake" %>
                   <% end %>
