@@ -4,7 +4,7 @@
 <div class="col-md-10">
 </br>
 
-<h3>商品新規登録</h3>
+<span class="bg-light" style="font-size: 21px;">商品新規登録</span>
 <table>
 <%= form_with model:@product,url: admin_products_path, method: :post, local:true do |f| %>
   <tr>
@@ -51,14 +51,16 @@
 
 </br>
 </br>
-<h3>商品一覧</h3>
+<span class="bg-light" style="font-size: 21px;">商品一覧</span>
 <table class="table">
 <tr>
+<thead class="thead-light">
 <th>商品ID</th>
 <th>商品名</th>
 <th>税抜価格</th>
 <th>ジャンル</th>
 <th>ステータス</th>
+</thead
 </tr>
 
  <% @products.each do |product|%>
@@ -78,4 +80,7 @@
   </tr>
   <% end %>
 </table>
+
  <%#= paginate @products %>
+
+

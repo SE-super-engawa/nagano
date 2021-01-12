@@ -5,10 +5,9 @@
 <div class="col-md-2"></div>
 <div class="col-md-10">
 </br>
-
-<h3>商品編集</h3>
+<span class="bg-light" style="font-size: 21px;">商品編集</span>
 <table>
-<%= form_with model:@product, local:true do |f| %>
+<%= form_with model:@product, url:admin_product_path, method: :patch, local:true do |f| %>
   <tr>
 
   <th>商品画像</th>

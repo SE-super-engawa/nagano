@@ -3,12 +3,14 @@ class ApplicationController < ActionController::Base
 
   # ログイン後のリダイレクト先
   def after_sign_in_path_for(resource)
-    customers_my_page_path
+    case resource
+      when Admin
+        admin_orders_path
+      when Customer
+        customers_my_page_path
+    end
   end
 
-  # def after_sign_in_path_for(resource)
-  #   admin_orders_path
-  # end
 
 
   def configure_permitted_parameters

@@ -4,9 +4,13 @@ Rails.application.routes.draw do
     resources :orders, only:[ :index, :show,:update]
     resources :customers, only:[:index, :show, :edit, :update]
     resources :order_products, only:[:update]
+    resources :genres, except:[:new, :show, :destroy]
+    resources :products,only: [:index, :show, :new, :create, :edit, :update]
   end
 
+
   get '/admin' => 'admin/homes#top', as: 'homes'
+
   get 'sessions/new'
   get 'sessions/crete'
   get 'sessions/destroy'
@@ -18,6 +22,7 @@ Rails.application.routes.draw do
     passwords: 'public/customers/passwords',
     registrations: 'public/customers/registrations'
   }
+
 
   scope module: :public do
     root to: 'homes#top'
@@ -39,11 +44,6 @@ Rails.application.routes.draw do
     get 'orders/thanks', to: 'orders#thanks'          #resources :orderより前に記載必須
     post 'orders/confirm', to: 'orders#confirm'       #resources :orderより前に記載必須
     resources :orders, only: [:new, :index, :show, :create]
-  end
-
-   namespace :admin do
-    resources :genres, except:[:new, :show, :destroy]
-    resources :products,only: [:index, :show, :new, :create, :edit, :update]
   end
 
 

@@ -3,11 +3,12 @@
 <div class="col-md-2"></div>
 <div class="col-md-10">
 
-<h3>商品詳細</h3>
+<span class="bg-light" style="font-size: 21px;">商品詳細</span>
 
 <table>
+<th>
 <%= attachment_image_tag @product, :image, format: 'jpeg', size: "200x120" %>
-
+</th>
   <tr>
   <th>商品名</th>
   <th><%= @product.name %></th>
