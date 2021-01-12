@@ -1,32 +1,49 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-4 col-xs-offset-2 product-show">
-      <%= attachment_image_tag @product, :image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+    <div class="col-md-5 col-md-offset-2 pt-5 product-show">
+      <%= attachment_image_tag @product, :image, :fill, 350, 350, format: 'jpeg', fallback: "no_image.jpg" %>
     </div>
 
-    <div class="col-xs-6 product-show">
+    <div class="col-md-7 pt-5 product-show">
+      <br>
       <h3><%= @product.name %></h3>
+      <br>
       <%= @product.description %>
 
       <div class="product-price">
-        <!--価格謎。price=税抜のカラムだから、tax_priceカラムも作成？？-->
-        <h4>¥ <%= tax_price(@product.price).to_s(:delimited) %>
-        <span>(税込)</span>
+        <br>
+        <br>
+        <h4>
+          <!--税込価格の表示-->
+          <% tax_price = @product.price*1.1 %>
+          <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
+        <p>(税込)</p>
         </h4>
       </div>
 
+      <br>
+      <!--フラッシュメッセージ-->
+      <% flash.each do |key, value| %>
+        <p class="alert alert-<%= key %>">
+          <%= value %>
+        </p>
+      <% end %>
+
       <div class="field">
+        <br>
+        <br>
         <% if @product.is_active == true %>
           <% if @product.genre.is_active == true %>
-            <%= form_with model: @cart_item, url: customers_cart_items_path, method: post do |f| %>
+            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+              <%= f.hidden_field :product_id, :value => @product.id %>
               <%= f.select :quantity, options_for_select((1..10).to_a), include_blank: "個数選択" %>
               <%= f.submit "カートに入れる", class: 'btn btn-success' %>
             <% end %>
           <% else %>
-            <h4>販売停止中</h4>
+            <h4 class="text-danger">販売停止中</h4>
           <% end %>
         <% elsif @product.is_active == false %>
-          <h4>販売停止中</h4>
+          <h4 class="text-danger">販売停止中</h4>
         <% end %>
       </div>
 
