@@ -1,5 +1,7 @@
 class Admin::ProductsController < ApplicationController
 
+  # before_action :if_not_admin
+
   def index
     @products = Product.all
     @product = Product.new
@@ -41,6 +43,10 @@ class Admin::ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :image, :description, :price, :is_active, :genre_id)
   end
+
+  # def if_not_admin
+  #   redirect_to homes_path unless current_customer.admin?
+  # end
 
 
 end

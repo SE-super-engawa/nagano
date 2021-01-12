@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     resources :genres, except:[:new, :show, :destroy]
     resources :products,only: [:index, :show, :new, :create, :edit, :update]
   end
-
-
   get '/admin' => 'admin/homes#top', as: 'homes'
 
   get 'sessions/new'

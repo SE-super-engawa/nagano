@@ -17,7 +17,7 @@
               <div class="navbar-brand p-3">
                 <!--ロゴの遷移先-->
                   <% if admin_signed_in? %>
-                    <%= link_to "ながのCAKE", admin_top_path, class: "fas fa-birthday-cake" %>
+                    <%= link_to "ながのCAKE", homes_path, class: "fas fa-birthday-cake" %>
                   <% else %>
                     <%= link_to "ながのCAKE", root_path, class: "fas fa-birthday-cake" %>
                   <% end %>
@@ -92,12 +92,21 @@
   });
 　</script>
 
+  <div class="container">
+    <!--フラッシュメッセージ-->
+    <% flash.each do |key, value| %>
+      <p class="alert alert-<%= key %> mt-3">
+        <%= value %>
+      </p>
+    <% end %>
     <%= yield %>
+  </div>
 
-    <footer class="text-center">
-      <p>© All rights reserved by Super Engawa (SE).</p>
-    </footer>
+  <footer class="shadow-sm mt-5">
+    <div class="container-fluid">
+      <p class="text-muted text-center"> © All rights reserved by Super Engawa (SE).</p>
+    </div>
+  </footer>
 
-
-  </body>
+ </body>
 </html>
