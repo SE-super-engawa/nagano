@@ -10,4 +10,5 @@ class Product < ApplicationRecord
   validates :price, numericality: { only_integer: true }
   validates :description, length: {maximum: 200}
 
+
 end

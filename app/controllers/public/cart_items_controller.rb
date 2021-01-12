@@ -7,47 +7,46 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    @cart_item = current_customer.cart_items.new(params_cart_item)
-    @update_cart_item = CartItem.find_by(product_id: @cart_item.product.id, customer_id: current_customer.id)     #カート内商品の重複を避け、商品の合計個数を出す
-    if @update_cart_item
-      @update_cart_item.quantity += @cart_item.quantity
-      @update_cart_item.save
-      redirect_to products_path
+    @cart_item = current_customer.cart_items.new(params_cart_item)   #カート内商品の重複を避け、商品の合計個数を出す
+    @update_cart_item = CartItem.find_by(product_id: @cart_item.product.id, customer_id: current_customer.id)
+    if not params[:cart_item][:quantity].empty? == true              #すでにカート内にある商品、尚且つ個数選択していない場合
+    if @update_cart_item                                             #すでにカート内にある商品を追加する場合
+      @cart_item.quantity += @update_cart_item.quantity
+      @update_cart_item.destroy                                      #重複した商品項目の消去
     end
-    p @cart_item
+    end
     if @cart_item.save
-      flash[:notice] = "商品を入れました"
-      redirect_to products_path
+      flash[:success] = "#{@cart_item.product.name}を入れました"
+      redirect_to cart_items_path
     else
-      @product = Product.find(params[:cart_item][:product_id])
+      @product = Product.find(params[:cart_item][:product_id])       #個数選択をせずに”カートに入れる”ボタンを押した場合
       @cart_item = CartItem.new
-      flash[:notice] = "個数を選択してください"
+      flash.now[:danger] = "個数を選択してください"
       render "public/products/show"
     end
   end
 
   def update
+    @cart_item = CartItem.find(params[:id])
     @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
-    flash.now[:success] = "#{@cart_item.product.name}の数量を変更しました"
+    flash[:success] = "#{@cart_item.product.name}の数量を変更しました"
     @cart_items = current_customer.cart_items
-    @price = sumprice(@cart_item).to_s(:delimited)   #←ここも謎
-    #@total = total_price(@cart_items).to_s(:delimited)   #税抜カラムのみで税込価格・小計・合計価格どうしよ・・・
-    redirect_to customers_cart_items_path
+    redirect_to cart_items_path
   end
 
   def destroy
+    @cart_items = current_customer.cart_items
+    @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
-    flash.now[:alert] = "#{@cart_item.product.name}を削除しました"
-    @cart_items = current_cart
-    #@total = total_price(@cart_items).to_s(:delimited)     #謎。
-    redirect_to customers_cart_items_path
+    flash[:info] = "#{@cart_item.product.name}を削除しました"
+    redirect_to cart_items_path
   end
 
   def destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
-    flash[:alert] = "カートの商品を全て削除しました"
-    redirect_to customers_cart_items_path
+    flash[:info] = "カートの商品を全て削除しました"
+    redirect_to cart_items_path
   end
 
   private
