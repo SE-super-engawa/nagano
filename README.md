@@ -1,24 +1,27 @@
-# README
+# ながのCAKE
+  長野県にある小さな洋菓子店、<br />
+  「ながのCAKE」の商品を通販するためのECサイトです
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 背景
+  元々近隣住民が顧客でしたが、昨年始めたInstagramから人気となり、<br />
+  全国から注文が来るようになりました。<br />
+  InstagramのDMやメールで通販の注文を受けていましたが、情報が煩雑になってきたため、<br />
+  管理機能を含んだ通販サイトを開設しようと思い至りました。
 
-Things you may want to cover:
+## 通販について
+  ・通販では注文に応じて製作する受注生産型としています<br />
+  ・現在通販での注文量は十分に対応可能な量のため、1日の受注量に制限は設けていません<br />
+  ・送料は1配送につき全国一律800円です<br />
+  ・友人や家族へのプレゼントなど、注文者の住所以外にも商品を発送できます<br />
+  ・支払い方法はクレジットカード、銀行振込から選択できます<br />
 
-* Ruby version
+## 実装機能
+  [functions_list.pdf](https://github.com/SE-super-engawa/nagano/files/5792515/functions_list.pdf)
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 作成者
+  チーム名【SE スーパーえんがわ】<br />
+  ・おたか<br />
+  ・チェス<br />
+  ・ゆうくん<br />
+  ・あみ

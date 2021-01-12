@@ -10,13 +10,15 @@
               <%= attachment_image_tag product, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
               <%= product.name %>
               <% end %>
+
               <% if product.is_active == true %>
                 <!--税込価格の表示-->
                 <% tax_price = product.price*1.1 %>
                 <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
               <% elsif product.is_active == false %>
-                <p class="text-danger">売り切れ中</p>
+                <p class="text-danger">販売停止中</p>
               <% end %>
+
             </div>
           <% end %>
         </div>

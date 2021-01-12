@@ -8,15 +8,6 @@ class Public::OrdersController < ApplicationController
   def confirm
     @cart_items = current_customer.cart_items
 
-    # 小計を出す。=0は初期値
-    @total_price = 0
-    @cart_items.each do |f|
-      @total_price += f.subtotal
-    end
-
-    # 請求金額の計算格納
-    @order_total_price = @total_price + 800
-
     params[:order][:payment] = params[:order][:payment].to_i #paymentの数値に変換
     @order = Order.new(order_params) #情報を渡している
 
@@ -49,15 +40,25 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @cart_items = current_customer.cart_items
     params[:order][:payment] = params[:order][:payment].to_i #paymentの数値に変換
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id #自身のidを代入
-    @order.save
-    flash[:notice] = "ご注文が確定しました。"
-    redirect_to orders_thanks_path
+    if @order.save
+      @cart_items.each do |cart_item|
+        order_product = OrderProduct.new(order_id: @order.id, product_id: cart_item.product.id, price: cart_item.product.price, quantity: cart_item.quantity, making_status: 0)
+        order_product.save
+      end
+      # オーダー確定後ユーザーのカートを削除する
+      @cart_items.destroy_all
+      flash[:notice] = "ご注文が確定しました。"
 
-    # オーダー確定後ユーザーのカートを削除する
-    current_customer.cart_items.destroy_all
+      redirect_to orders_thanks_path
+
+    else
+      @order.customer_id = current_customer.id
+      render :new
+    end
 
   end
 
@@ -71,17 +72,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_products = OrderProduct.all
-    @cart_items = current_customer.cart_items
-
-    # 小計を出す。=0は初期値
-    @total_price = 0
-    @cart_items.each do |f|
-      @total_price += f.subtotal
-    end
-
-    # 請求金額の計算格納
-    @order_total_price = @total_price + 800
+    @order_products = @order.order_products
   end
 
    private
@@ -94,7 +85,7 @@ class Public::OrdersController < ApplicationController
                                       :total_price,
                                       :payment,
                                       :status,
-                                      order_products_attributes: [:price, :quantity, :product_id])
+                                      order_products_attributes: [:product_id, :quantity, :price])
     end
 
     def shipping_address_params
