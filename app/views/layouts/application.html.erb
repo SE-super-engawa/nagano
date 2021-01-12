@@ -24,11 +24,11 @@
               </div>
             </div>
 
-            <div class="col align-self-center">
+            <div class="col-5">
               <!--顧客がログインしている場合-->
               <% if customer_signed_in? %>
                 <div class="customer-name p-3">
-                  ようこそ、<%= current_customer.family_name %>さん！
+                  <p>ようこそ、 <%= current_customer.family_name %> さん！</p>
                 </div>
             </div>
             <ul class="nav navbar-expand-lg navbar-right">
@@ -93,12 +93,14 @@
 　</script>
 
   <div class="container">
+
     <!--フラッシュメッセージ-->
     <% flash.each do |key, value| %>
       <p class="alert alert-<%= key %> mt-3">
         <%= value %>
       </p>
     <% end %>
+
     <%= yield %>
   </div>
 
