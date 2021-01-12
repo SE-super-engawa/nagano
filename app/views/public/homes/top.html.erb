@@ -1,6 +1,6 @@
 <body>
   <main>
-    <div class="container">
+    <div class="container-fluid p-3">
       <div class="row">
         <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
           <div style="position: relative; display:inline-block;"></div>
@@ -13,28 +13,27 @@
             購入には会員登録が必要になります。
           </p>
           </div>
-          </div>
         </div>
       </div>
-      <h3 class="m-3">新着商品</h3>
-        <div class="row">
-            <% @products.each do |product| %>
-              <div class="product-container col-lg-2 offset mt-4 pl-5 ">
-                <%= link_to product_path(product.id), class: "btn-link" do %>
-                <%= attachment_image_tag product, :image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" %><br>
-                <%= product.name %>
-                <% end %>
-                <!--税込価格を表示-->
-                <% tax_price = product.price*1.1 %>
-                <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
-              </div>
+      <div class="row">
+        <h3 class="my-box col-6 m-3 text-center">新着商品</h3>
+      </div>
+      <div class="row justify-content-center">
+        <% @products.each do |product| %>
+          <div class="product-container col-2 offset mt-3 pl-5 ">
+            <%= link_to product_path(product.id), class: "btn-link" do %>
+              <%= attachment_image_tag product, :image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" %><br>
+              <%= product.name %>
             <% end %>
-        </div>
-        <div class="col-md-10 text-right">
-          <%= link_to "全ての商品を見る>", products_path, class: "btn-link pull-right" %>
-        </div>
+            <!--税込価格を表示-->
+            <% tax_price = product.price*1.1 %>
+            <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
+          </div>
+        <% end %>
       </div>
-
+      <div class="col-md-10 text-right">
+        <%= link_to "全ての商品を見る>", products_path, class: "btn-link pull-right" %>
+      </div>
     </div>
   </main>
 </body>
