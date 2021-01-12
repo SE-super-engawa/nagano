@@ -1,4 +1,7 @@
 class Public::OrdersController < ApplicationController
+
+ before_action :authenticate_customer!
+
   def new
     @customer = current_customer
     @order = Order.new
@@ -34,7 +37,9 @@ class Public::OrdersController < ApplicationController
         @order.name = @shipping_address.name #上記で代入された宛名をorderに代入
         @order.address = @shipping_address.address #上記で代入された住所をorderに代入
       else
-       render 'new'
+        @shipping_addresses = ShippingAddress.where(customer: current_customer)
+        flash[:danger] = "住所を正しく入力してください。郵便番号はハイフンを入れず、7桁でお願いします。"
+        render :new
       end
     end
   end
