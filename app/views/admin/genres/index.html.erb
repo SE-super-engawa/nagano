@@ -4,23 +4,40 @@
   <div class="col-md-9">
    </br>
    <span class="bg-light" style="font-size: 21px;">ジャンル一覧・追加</span>
-
-   <%= form_with model: @genre do |f| %>
+   <table>
+   <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
+     <tr>
      <th>ジャンル名</th>
-      <%= f.text_field :name %>
-      <%= f.submit '新規登録'%>
+      <th><%= f.text_field :name %></th>
+     </tr>
+     <tr>
+     <th>有効ステータス</th>
+      <th><%= f.radio_button :is_active, true, checked: "checked" %> 有効 <%= f.radio_button :is_active, false %> 無効</th>
+     </tr>
+     <tr>
+     <th><%= f.submit '新規登録'%></th>
+     </tr> 
    <% end %>
-
+   </table>
+   
    </br>
    <table class="table">
     <thead class="thead-light">
     <th>ジャンル</th>
+    <th>有効ステータス</th>
     <th></th>
     </thead>
      <% @genres.each do |genre|%>
     <tr >
      <th>
      <%= genre.name %>
+     </th>
+     <th>
+       <% if (genre.is_active == false ) %>
+             無効
+       <% else %>
+             有効
+       <% end %>
      </th>
      <th>
      <%= link_to "編集する", edit_admin_genre_path(genre),class:'btn btn-success'  %>
