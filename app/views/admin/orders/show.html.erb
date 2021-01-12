@@ -1,32 +1,32 @@
+<div clss="container>
+  <div class="row">
+    <div class="col-md-11 offset-md-1 w-100">
 <h4>注文履歴詳細</h4>
-<table>
-  <tr>
-    <td>購入者</td>
-    <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",root_path,class:"text-dark"%></u></td>
-    <!-- admin_customer_path(@order.customer)% cusromerとmergeしていないため↑を仮適用-->
-  </tr>
-  <tr>
-    <td>注文日</td>
-    <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
-  </tr>
-  <tr>
-    <td>配送先</td>
-    <td>〒<%= @order.postal_code %><%= @order.address %></td>
-  </tr>
-  <tr>
-    <td>支払方法</td>
-    <td><%= @order.payment_i18n %></td>
-  </tr>
-  <tr>
-    <td>注文ステータス</td>
-      <td>
-        <%= form_with model:@order, method: :post, local:true do |f| %>
-          <%= f.select :status, Order.statuses.keys.map{|k| [k,k]}%>
-        <% end %>
-      </td>
-    <td><%= link_to "更新",admin_order_path(@order),method: :patch %></td>
-  </tr>
-</table>
+<%= form_with model:@order,url:"/admin/orders/#{@order.id}",local:true do |f| %>
+  <table>
+    <tr>
+      <td>購入者</td>
+      <td><u><%= link_to "#{@order.customer.family_name}#{@order.customer.first_name}",admin_customer_path(@order.customer),class:"text-dark" %></u></td>
+    </tr>
+    <tr>
+      <td>注文日</td>
+      <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr>
+      <td>配送先</td>
+      <td>〒<%= @order.postal_code %><%= @order.address %></td>
+    </tr>
+    <tr>
+      <td>支払方法</td>
+      <td><%= @order.payment_i18n %></td>
+    </tr>
+    <tr>
+      <td>注文ステータス</td>
+      <td><%= f.select :status, Order.statuses.keys.map{|k|[I18n.t("enums.order.status.#{k}"), k]}%></td>
+      <td><%= f.submit '更新',class:"btn btn-success text-white" %></td>
+    </tr>
+  </table>
+<% end %>
 <table>
   <tr>
     <td>商品名</td>
@@ -35,31 +35,21 @@
     <td>小計</td>
     <td>製作ステータス</td>
   </tr>
-
-<% 
-=begin
-%>
-order.productsと
-  <% @order.order_products each do |order_product| %>
-  <tr>
-    <td><%= order_product.products.name %></td>
-    <td><%= order_product.price %></td>
-    <td><%= order_product.quantity %></td>
-    <td><%= order_product.price*order_product.quantity %></td>
-    <td>
-        <%= form_with order_product, method: :post do |f| %>
-          <%= f.select :status, OrderProduct.making_status.keys, {} %>
-        <% end %>
-        <%= link_to "更新",admin_order_path(@order),method: :patch %></td>
-    </td>
-  </tr>
+  
+  <% @order_products.each do |order_product| %>
+    <%= form_with model:order_product,local:true do |f| %>
+      <tr>
+        <td><%= order_product.products.name %></td>
+        <td><%= order_product.price %></td>
+        <td><%= order_product.quantity %></td>
+        <td><%= order_product.price*order_product.quantity %></td>
+        <td><%= f.select :status, OrderProduct.making_statuses.keys.map{|k|[I18n.t("enums.order_product.making_status.#{k}"), k]}%></td>
+        <td><%= f.submit '更新',class:"btn btn-success text-white" %></td>
+      </tr>
+     <% end %>
   <% end %>
 </table>
 
 <span>商品合計<%= @total_price %>円</span>
 <span>送料<%= @order.shipping_fee %>円</span>
 <span>請求金額<%= @invice_fee %>円</span>
-
-<%
-=end
-%>
