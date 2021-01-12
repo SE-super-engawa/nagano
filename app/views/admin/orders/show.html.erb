@@ -37,13 +37,13 @@
   </tr>
   
   <% @order_products.each do |order_product| %>
-    <%= form_with model:order_product,local:true do |f| %>
+    <%= form_with model:order_product,url:"/admin/orders/#{@order.id}",local:true do |f| %>
       <tr>
-        <td><%= order_product.products.name %></td>
+        <td><%= order_product.product.name %></td>
         <td><%= order_product.price %></td>
         <td><%= order_product.quantity %></td>
         <td><%= order_product.price*order_product.quantity %></td>
-        <td><%= f.select :status, OrderProduct.making_statuses.keys.map{|k|[I18n.t("enums.order_product.making_status.#{k}"), k]}%></td>
+        <td><%= f.select :making_status, OrderProduct.making_statuses.keys.map{|k|[("#{k}"), k]}%></td>
         <td><%= f.submit '更新',class:"btn btn-success text-white" %></td>
       </tr>
      <% end %>
