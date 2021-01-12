@@ -1,23 +1,27 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :orders, only:[ :index, :show,:update]
+    resources :customers, only:[:index, :show, :edit, :update]
+    resources :order_products, only:[:update]
+    resources :genres, except:[:new, :show, :destroy]
+    resources :products,only: [:index, :show, :new, :create, :edit, :update]
+  end
+
+
   get '/admin' => 'admin/homes#top', as: 'homes'
 
   get 'sessions/new'
   get 'sessions/crete'
   get 'sessions/destroy'
 
-  devise_for :admin
+  devise_for :admins
 
   devise_for :customers, controllers: {
     sessions: 'public/customers/sessions',
     passwords: 'public/customers/passwords',
     registrations: 'public/customers/registrations'
   }
-
-  namespace :admin do
-    resources :genres, except:[:new, :show, :destroy]
-    resources :products,only: [:index, :show, :new, :create, :edit, :update]
-  end
 
 
   scope module: :public do
@@ -41,5 +45,6 @@ Rails.application.routes.draw do
     post 'orders/confirm', to: 'orders#confirm'       #resources :orderより前に記載必須
     resources :orders, only: [:new, :index, :show, :create]
   end
+
 
 end
