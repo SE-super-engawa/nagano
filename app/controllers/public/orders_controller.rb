@@ -1,4 +1,8 @@
 class Public::OrdersController < ApplicationController
+
+  before_action :authenticate_customer!
+
+
   def new
     @customer = current_customer
     @order = Order.new
