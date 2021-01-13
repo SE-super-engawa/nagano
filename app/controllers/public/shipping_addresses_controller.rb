@@ -1,4 +1,5 @@
 class Public::ShippingAddressesController < ApplicationController
+
   def index
     @shipping_address = ShippingAddress.new
     @customer = Customer.find(current_customer.id)
