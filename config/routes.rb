@@ -7,11 +7,17 @@ Rails.application.routes.draw do
     resources :genres, except:[:new, :show, :destroy]
     resources :products,only: [:index, :show, :new, :create, :edit, :update]
   end
-  get '/admin' => 'admin/homes#top', as: 'homes'
+  # get '/admin' => 'admin/sessions#new', as: 'homes'
 
   get 'sessions/new'
   get 'sessions/crete'
   get 'sessions/destroy'
+
+  devise_scope :admin do
+    get 'admin' => 'admin/sessions#new' , as: 'homes'
+    post 'admin' => 'admin/sessions#create'
+    delete 'admin' => 'admin/sessions#destro'
+  end
 
   devise_for :admins
 

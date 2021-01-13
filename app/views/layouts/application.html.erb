@@ -25,7 +25,7 @@
               </div>
             </div>
 
-            <div class="col-5">
+            <div class="col align-self-center">
               <!--顧客がログインしている場合-->
               <% if customer_signed_in? %>
                 <div class="customer-name p-3">
@@ -49,19 +49,19 @@
             <!--管理者がログインしている場合-->
             <% elsif admin_signed_in? %>
             <ul class="nav navbar-expand-lg navbar-right">
-              <li class="nav-item p-3">
+              <li class="nav-item mr-3">
                 <%= link_to "商品一覧", admin_products_path, class: "btn btn-outline-secondary" %>
               </li>
-              <li class="nav-item p-3">
+              <li class="nav-item mr-3">
                 <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-secondary" %>
               </li>
-              <li class="nav-item p-3">
+              <li class="nav-item mr-3">
                 <%= link_to "注文履歴一覧", admin_orders_path, class: "btn btn-outline-secondary" %>
               </li>
-              <li class="nav-item p-3">
+              <li class="nav-item mr-3">
                 <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-secondary" %>
               </li>
-              <li class="nav-item p-3">
+              <li class="nav-item mr-3">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete , class: "btn btn-outline-secondary" %>
               </li>
             </ul>
