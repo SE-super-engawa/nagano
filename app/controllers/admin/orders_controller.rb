@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
 
-  # before_action :if_not_admin #
+  before_action :authenticate_admin!
   
   def index
     path = Rails.application.routes.recognize_path(request.referer)

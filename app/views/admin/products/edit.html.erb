@@ -6,8 +6,9 @@
 <div class="col-md-10">
 </br>
 <span class="bg-light" style="font-size: 21px;">商品編集</span>
-<table>
+
 <%= form_with model:@product, url:admin_product_path, method: :patch, local:true do |f| %>
+  <table>
   <tr>
 
   <th>商品画像</th>
@@ -43,10 +44,14 @@
   <tr>
   <th><%= f.submit '変更を保存', class:'btn btn-success' %></th>
   </tr>
-
+  </table>
 <% end %>
-</table>
+
 
 </div>
 </div>
 </div>
+
+
+
+
