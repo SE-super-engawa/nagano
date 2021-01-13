@@ -17,12 +17,12 @@ class Admin::ProductsController < ApplicationController
 
   def create
      @product =Product.new(product_params)
-
      if @product.save
-     redirect_to admin_product_path(@product.id)
+       flash[:success] = "商品を追加しました"
+       redirect_to admin_product_path(@product.id)
     else
-
-     render :index
+　　   flash.now[:danger] = "商品の追加に失敗しました"
+       render :index
     end
   end
 
@@ -32,10 +32,11 @@ class Admin::ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-
     if @product.update(product_params)
+      flash[:success] = "商品を変更しました"
       redirect_to admin_product_path(@product.id)
     else
+      flash.now[:danger] = "商品の変更に失敗しました"
       render :index
     end
   end
