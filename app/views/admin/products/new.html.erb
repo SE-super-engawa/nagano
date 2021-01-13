@@ -5,8 +5,8 @@
 </br>
 
 <span class="bg-light" style="font-size: 21px;">商品新規登録</span>
-<table>
 <%= form_with model:@product,url: admin_products_path, method: :post, local:true do |f| %>
+<table>
   <tr>
 
   <th>商品画像</th>
@@ -43,8 +43,8 @@
   <th><%= f.submit '新規登録', class:'btn btn-success' %></th>
   </tr>
 
-<% end %>
 </table>
+<% end %>
 </div>
 </div>
 </div>
