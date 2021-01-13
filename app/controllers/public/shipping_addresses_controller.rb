@@ -12,7 +12,8 @@ class Public::ShippingAddressesController < ApplicationController
     if @shipping_address.save
       redirect_to shipping_addresses_path, success:"新しい配送先を登録しました。"
     else
-      @shipping_addresses = ShippingAddress.all
+      @customer = Customer.find(current_customer.id)
+      @shipping_addresses = @customer.shipping_address.all
       render :index
     end
   end
