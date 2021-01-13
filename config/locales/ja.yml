@@ -14,18 +14,18 @@ ja:
     attributes:
       customer:
         family_name: "姓"
-        first_name: 名
-        family_name_kana: 姓カナ
-        first_name_kana: 名カナ
-        postal_code: 郵便番号
-        address: 住所
-        phone_number: 電話番号
+        first_name: "名"
+        family_name_kana: "姓カナ"
+        first_name_kana: "名カナ"
+        postal_code: "郵便番号"
+        address: "住所"
+        phone_number: "電話番号"
       cart_item:
-        quantity: 個数
+        quantity: "個数"
       shipping_address:
-        postal_code: 郵便番号
-        address: 住所
-        name: 宛名
+        postal_code: "郵便番号"
+        address: "住所"
+        name: "宛名"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

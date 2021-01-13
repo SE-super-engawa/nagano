@@ -4,8 +4,9 @@
   <div class="col-md-9">
    </br>
    <span class="bg-light" style="font-size: 21px;">ジャンル一覧・追加</span>
-   <table>
+
    <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
+    <table>
      <tr>
      <th>ジャンル名</th>
       <th><%= f.text_field :name %></th>
@@ -16,10 +17,11 @@
      </tr>
      <tr>
      <th><%= f.submit '新規登録'%></th>
-     </tr> 
+     </tr>
    <% end %>
    </table>
-   
+   </br>
+   </br>
    </br>
    <table class="table">
     <thead class="thead-light">
@@ -28,7 +30,8 @@
     <th></th>
     </thead>
      <% @genres.each do |genre|%>
-    <tr >
+     
+     <tr>
      <th>
      <%= genre.name %>
      </th>
@@ -43,8 +46,9 @@
      <%= link_to "編集する", edit_admin_genre_path(genre),class:'btn btn-success'  %>
      </th>
     </tr>
+    
      <% end %>
-    </table>
+   </table>
   </div>
  </div>
 </div>
