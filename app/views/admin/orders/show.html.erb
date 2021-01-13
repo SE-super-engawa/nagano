@@ -44,17 +44,19 @@
           <td>　</td>
         </tr>
         <% @order_products.each do |order_product| %>
-          <%= form_with model:order_product,url:admin_order_product_path(order_product),local:true do |f| %>
             <tr>
-              <td><%= order_product.product.name %></td>
-              <td><%= order_product.price.to_s(:delimited) %></td>
-              <td><%= order_product.quantity.to_s(:delimited) %></td>
-              <% @sub_totall_price =  order_product.price*order_product.quantity %>
-              <td><%=@sub_totall_price.to_s(:delimited)%></td>
-              <td><%= f.select :making_status, OrderProduct.making_statuses.keys.map{|k|[("#{k}"), k]}%></td>
-              <td><%= f.submit '更新',class:"btn btn-success text-white" %></td>
+                <td><%= order_product.product.name %></td>
+                <td><%= order_product.price.to_s(:delimited) %></td>
+                <td><%= order_product.quantity.to_s(:delimited) %></td>
+                <% @sub_totall_price =  order_product.price*order_product.quantity %>
+                <td><%=@sub_totall_price.to_s(:delimited)%></td>
+                <td>
+                  <%= form_with model:order_product,url:admin_order_product_path(order_product),local:true do |f| %>
+                    <%= f.select :making_status, OrderProduct.making_statuses.keys.map{|k|[("#{k}"), k]}%>
+                    <%= f.submit '更新',class:"btn btn-success text-white" %>
+                  <% end %>
+                </td>
             </tr>
-           <% end %>
         <% end %>
       </table>
     </div>

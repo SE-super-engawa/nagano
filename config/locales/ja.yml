@@ -8,7 +8,7 @@ ja:
         waiting_payment: "入金待ち"
         payment_confirmation: "入金確認"
         in_production: "製作中"
-        preparing_ship: "発送準備中"
+        preparing_ship: "発送待ち"
         done_ship: "発送済み"
   activerecord:
     attributes:

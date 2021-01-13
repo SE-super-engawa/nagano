@@ -20,4 +20,5 @@ enum status:{
     done_ship: 4,            #発送済み
   }
 
+
 end
