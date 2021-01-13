@@ -39,4 +39,11 @@ class Public::Customers::SessionsController < Devise::SessionsController
   #     flash[:error] = "必須項目を入力してください。"
   #   end
   # end
+
+  protected
+
+    # サインアウト後のリダイレクト先
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 end
