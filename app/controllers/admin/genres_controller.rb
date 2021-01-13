@@ -1,18 +1,13 @@
 class Admin::GenresController < ApplicationController
-<<<<<<< HEAD
-  
-=======
-
   before_action :authenticate_admin!
 
->>>>>>> 9d92ce87fb574b2626d4d7108b5844ba21cd3a07
   def create
     @genre =Genre.new(genre_params)
     if @genre.save
      redirect_to admin_genres_path(@genre.id), success: "ジャンルを追加しました"
     else
-       flash.now[:danger] = "追加されませんでした"
-      reder :index
+     flash.now[:danger] = "ジャンルの追加に失敗しました"
+     render :index
     end
   end
 
@@ -29,8 +24,11 @@ class Admin::GenresController < ApplicationController
     @genre = Genre.find(params[:id])
 
     if @genre.update(genre_params)
+      flash[:success] = "ジャンル名を変更しました"
       redirect_to admin_genres_path
     else
+      flash.now[:danger] = "ジャンルの変更に失敗しました"
+      render :index
     end
   end
 
