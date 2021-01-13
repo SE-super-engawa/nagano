@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
-  # before_action :authenticate_customer! #ログインしていないとログインページにリダイレクトさせる
+
+  before_action :authenticate_customer! #ログインしていないとログインページにリダイレクトさせる
 
   def show
     @customer = current_customer

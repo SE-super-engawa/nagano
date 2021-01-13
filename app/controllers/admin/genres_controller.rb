@@ -1,12 +1,10 @@
 class Admin::GenresController < ApplicationController
-
   before_action :authenticate_admin!
 
   def create
     @genre =Genre.new(genre_params)
     if @genre.save
-      flash[:success] = "ジャンルを追加しました"
-     redirect_to admin_genres_path(@genre.id)
+     redirect_to admin_genres_path(@genre.id), success: "ジャンルを追加しました"
     else
      flash.now[:danger] = "ジャンルの追加に失敗しました"
      render :index

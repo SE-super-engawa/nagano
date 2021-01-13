@@ -1,6 +1,8 @@
-<h2 class="row my-3">編集</h2>
+<div class="container">
+ <h2 class="row my-3">編集</h2>
 
 <%= form_with model: @customer, url: customers_path, local: true do |f| %>
+
   <div class="field">
     <%= f.label :"名前", class: "col-sm-3 control-label" %>
     <%= f.text_field :family_name, autofocus: true, class: "col-sm-2 form-control-static name" %>
@@ -38,4 +40,6 @@
     <%= link_to "退会する", customers_check_path, class: " btn btn-danger offset-sm-1 col-sm-1 mt-3" %>
     </div>
   </div>
+
 <% end %>
+</div>
