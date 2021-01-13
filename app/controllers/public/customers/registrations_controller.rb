@@ -73,4 +73,10 @@ class Public::Customers::RegistrationsController < Devise::RegistrationsControll
   def after_update_path_for(resource)
     customers_my_page_path
   end
+
+  # サインアップ後のリダイレクト先
+  def after_sign_up_path_for(resource)
+    root_path
+  end
+
 end
