@@ -38,7 +38,7 @@ class Public::OrdersController < ApplicationController
         @order.address = @shipping_address.address #上記で代入された住所をorderに代入
       else
         @shipping_addresses = ShippingAddress.where(customer: current_customer)
-        flash[:danger] = "住所を正しく入力してください。郵便番号はハイフンを入れず、7桁でお願いします。"
+        flash.now[:danger] = "住所を正しく入力してください。郵便番号はハイフンを入れず、7桁でお願いします。"
         render :new
       end
     end

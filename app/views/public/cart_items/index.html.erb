@@ -30,8 +30,8 @@
               </td>
               <td>
                 <!--税込価格の表示-->
-                <% tax_price = cart_item.product.price*1.1 %>
-                <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
+                <% tax_price = (cart_item.product.price*1.1).to_i %>
+                <p>¥ <%= tax_price.to_s(:delimited) %></p>
               </td>
               <td>
                 <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
@@ -42,7 +42,7 @@
               <td>
                 <!--小計-->
                 <% sub_total_price = tax_price*cart_item.quantity %>
-                <p>¥ <%= sub_total_price.round.to_s(:delimited) %></p>
+                <p>¥ <%= sub_total_price.to_s(:delimited) %></p>
                 <% @total_price += sub_total_price %>
               </td>
               <td>
@@ -57,7 +57,7 @@
 
     <div class="row justify-content-between">
       <div class="col-4 text-center m-3">
-        <%= link_to "買い物を続ける", products_path, class: "btn btn-primary" %>
+        <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
       </div>
 
       <div class="col-4 m-3">
@@ -66,7 +66,7 @@
             <th class="tablehead table-active">合計金額</th>
             <td>
             <!--合計金額の表示-->
-            <p>¥ <%= @total_price.round.to_s(:delimited) %></p>
+            <p>¥ <%= @total_price.to_s(:delimited) %></p>
             </td>
           </tr>
         </table>
