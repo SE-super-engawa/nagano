@@ -1,21 +1,20 @@
 class Admin::GenresController < ApplicationController
-
   before_action :authenticate_admin!
 
   def create
-    @genre =Genre.new(genre_params)
+    @genre = Genre.new(genre_params)
     if @genre.save
-      flash[:success] = "ジャンルを追加しました"
-     redirect_to admin_genres_path(@genre.id)
+     redirect_to admin_genres_path(@genre.id), success: "ジャンルを追加しました"
     else
      flash.now[:danger] = "ジャンルの追加に失敗しました"
+     @genres = Genre.all
      render :index
     end
   end
 
   def index
-    @genres =Genre.all
-    @genre =Genre.new
+    @genres = Genre.all
+    @genre = Genre.new
   end
 
   def edit
@@ -43,6 +42,3 @@ private
 end
 
 
-=begin
- {"name"=>"ケーキ", "is_active"=>"true", "commit"=>"新規登録"}
-=end

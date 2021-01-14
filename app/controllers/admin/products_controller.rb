@@ -21,8 +21,8 @@ class Admin::ProductsController < ApplicationController
        flash[:success] = "商品を追加しました"
        redirect_to admin_product_path(@product.id)
     else
-　　   flash.now[:danger] = "商品の追加に失敗しました"
-       render :index
+       flash.now[:danger] = "商品の追加に失敗しました"
+       render :new
     end
   end
 
@@ -37,7 +37,8 @@ class Admin::ProductsController < ApplicationController
       redirect_to admin_product_path(@product.id)
     else
       flash.now[:danger] = "商品の変更に失敗しました"
-      render :index
+      @products = Product.all
+      render :edit
     end
   end
 
