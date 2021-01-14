@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0'
+# gem 'rails', '~> 5.0.0'
+gem 'rails','~> 5.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -42,6 +43,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-byebug'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -55,3 +57,6 @@ gem 'bootstrap', '~> 4.5'
 gem 'kaminari','~> 1.2.1'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
+gem 'rails-i18n'
+gem 'enum_help' #enum　日本語変換
+gem 'pry-byebug'

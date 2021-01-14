@@ -1,0 +1,60 @@
+<h3 class="my-3">注文情報入力</h3>
+
+  <%= form_with(model: @order, local: true, url: orders_confirm_path) do |f| %>
+
+  <h4><strong>支払方法</strong></h4>
+  <!-- ラジオボタンの記述 checked: "checked"で初期値で選択された状態にする-->
+  <div class="row-12 ml-4">
+    <label><%= f.radio_button :payment, 0, checked: "checked"%> クレジットカード </label><br>
+  </div>
+  <div class="row-12 ml-4">
+    <label><%= f.radio_button :payment, 1 %> 銀行振込</label>
+  </div>
+
+  <h4><strong>お届け先</strong></h4>
+  <!-- ログインcustomerの住所  -->
+    <div class="row-12 mt-3 ml-4">
+      <%= f.radio_button :addresses, "residence", checked: true  %>
+        <span>ご自身の住所</span><br>
+        <div class="ml-4">
+          <%= "〒 #{current_customer.postal_code} #{current_customer.address}" %><br>
+          <%= "#{current_customer.family_name} #{current_customer.first_name}" %>
+        </div>
+    </div>
+  <!-- end -->
+
+  <!-- 登録済住所 -->
+  <% if @shipping_addresses != [] %>
+    <div class="row-12 mt-3 ml-4">
+      <%= f.radio_button :addresses, "shipping_addresses" %>
+      <span>登録済住所から選択</span><br>
+      <div class="ml-4">
+      <!-- order_addressはshipping_addressのモデルでpostal_code+address+name -->
+      <%= f.collection_select(:shipping_address_id, @shipping_addresses, :id, :order_address) %>
+      </div>
+    </div>
+  <% end %>
+  <!-- end -->
+
+  <!-- 新規届け先 -->
+    <div class="row-12 mt-3 ml-4">
+    <%= f.radio_button :addresses, "new_address" %>
+    <span>新しいお届け先</span><br>
+    <div class="form-group row ml-3">
+    <%= f.label :"郵便番号(ハイフンなし)", class: 'col-3' %>
+    <%= f.text_field :postal_code, class: 'form_control col-4' %>
+    </div>
+    <div class="form-group row ml-3">
+      <%= f.label :"住所", class: 'col-3' %>
+      <%= f.text_field  :address, class: 'form_control col-5' %>
+    </div>
+    <div class="form-group row ml-3">
+      <%= f.label :"宛名", class: 'col-3' %>
+      <%= f.text_field  :name, class: 'form_control col-5' %>
+    </div>
+  <!-- end -->
+
+  <div class="row offset-5">
+    <%= f.submit "確認画面に進む", class: "btn btn-primary text-cenrer" %>
+  </div>
+<% end %>

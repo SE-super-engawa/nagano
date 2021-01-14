@@ -1,0 +1,39 @@
+<body>
+  <main>
+    <div class="container-fluid p-3">
+      <div class="row">
+        <div class="mx-auto col-12">
+          <div style="position: content-center; relative; display:inline-block;"></div>
+          <img src="/assets/image/cake-4916482_640.jpg" class="d-block mx-auto" alt="topimg">
+          <div style="background-color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); max-width: 100%; max-height: 100%; padding: 15px; text-align: center;">
+          <p>
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="my-box col-6 m-3 text-center">新着商品</h3>
+      </div>
+      <div class="row justify-content-center">
+        <% @products.each do |product| %>
+          <div class="product-container col-2 offset mt-3 pl-5 ">
+            <%= link_to product_path(product.id), class: "btn-link" do %>
+              <%= attachment_image_tag product, :image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" %><br>
+              <%= product.name %>
+            <% end %>
+            <!--税込価格を表示 %>-->
+            <% tax_price = (product.price*1.1).to_i %>
+            <p>¥ <%= tax_price.to_s(:delimited) %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-10 text-right">
+        <%= link_to "全ての商品を見る>", products_path, class: "btn-link pull-right" %>
+      </div>
+    </div>
+  </main>
+</body>
