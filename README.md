@@ -14,9 +14,17 @@
   ・送料は1配送につき全国一律800円です<br />
   ・友人や家族へのプレゼントなど、注文者の住所以外にも商品を発送できます<br />
   ・支払い方法はクレジットカード、銀行振込から選択できます<br />
+  
+## 実装機能一覧
+  [実装機能一覧.pdf](https://github.com/SE-super-engawa/nagano/files/5814429/default.pdf)
 
-## 実装機能
-  [functions_list.pdf](https://github.com/SE-super-engawa/nagano/files/5792515/functions_list.pdf)
+
+## ER図
+  ![Untitled Diagram (2)](https://user-images.githubusercontent.com/73016008/104584189-87086900-56a5-11eb-84d7-6c17bb51b3f9.png)
+
+
+## アプリケーション詳細設計
+[【チーム開発】アプリケーション詳細設計書.pdf](https://github.com/SE-super-engawa/nagano/files/5814461/default.pdf)
 
 
 ## 作成者
