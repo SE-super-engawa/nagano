@@ -25,9 +25,9 @@
               <%= attachment_image_tag product, :image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" %><br>
               <%= product.name %>
             <% end %>
-            <!--税込価格を表示-->
-            <% tax_price = product.price*1.1 %>
-            <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
+            <!--税込価格を表示 %>-->
+            <% tax_price = (product.price*1.1).to_i %>
+            <p>¥ <%= tax_price.to_s(:delimited) %></p>
           </div>
         <% end %>
       </div>

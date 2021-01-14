@@ -46,7 +46,6 @@ class Public::OrdersController < ApplicationController
 
   def create
     @cart_items = current_customer.cart_items
-    # params[:order][:payment] = params[:order][:payment].to_i #paymentの数値に変換
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id #自身のidを代入
     if @order.save
