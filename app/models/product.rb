@@ -6,7 +6,7 @@ class Product < ApplicationRecord
 
   attachment :image
 
-  validates :name, :genre_id, :price, presence: true
+  validates :name, :genre_id, :price, :description, presence: true
   validates :price, numericality: { only_integer: true }
   validates :description, length: {maximum: 200}
 

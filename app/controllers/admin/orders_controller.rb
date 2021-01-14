@@ -25,6 +25,11 @@ class Admin::OrdersController < ApplicationController
   def update
     order = Order.find(params[:id])
     order.update(order_params)
+    if order.status == "payment_confirmation"
+      order.order_products.each {|order_product|
+      order_product.update(making_status: "製作待ち")
+      }
+    end
     redirect_back(fallback_location: root_path)
   end
   

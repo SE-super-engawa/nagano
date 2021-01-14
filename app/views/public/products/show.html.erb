@@ -15,8 +15,8 @@
         <br>
         <h4>
           <!--税込価格の表示-->
-          <% tax_price = @product.price*1.1 %>
-          <p>¥ <%= tax_price.round.to_s(:delimited) %></p>
+          <% tax_price = (@product.price*1.1).to_i %>
+          <p>¥ <%= tax_price.to_s(:delimited) %></p>
         <p>(税込)</p>
         </h4>
       </div>
